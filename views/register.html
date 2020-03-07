@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMAGO - Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .vertical-center
+        {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-12 col-lg-6 mx-auto vertical-center">
+        <div class="container mx-auto my-5">
+            <h2>Register a new account</h2>
+            <div class="jumbotron bg-grey" id="accountbox">
+                <form action="catalogue.html">
+                    <div id="acctformcont" class="container">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input class="form-control" type="text" id="name"placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input class="form-control" type="email" id="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Contact Number</label>
+                            <input class="form-control" type="email" id="number" placeholder="Contact Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Password</label>
+                            <input class="form-control" type="password" id="email" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Confirm Password</label>
+                            <input class="form-control" type="password" id="email" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="add1">Address Line 1</label>
+                            <input class="form-control" type="text" id="add1" placeholder="Unit / Block no., Street no., Subd.,">
+                        </div>
+                        <div class="form-group">
+                            <label for="add2">Address Line 2</label>
+                            <input class="form-control" type="text" id="add2" placeholder="Brgy., Municipality, City / Province, Region">
+                        </div>
+                        <button type='submit' class='btn btn-primary'>Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class='footer text-center py-5 bg-dark text-white mt-5'>
+        <img src='../assets/pharmago-logo.png' height='40px'> <br><br>
+        CCAPDEV Requirement
+        <br>Cansana. Dela Cruz. Jamalul.
+    </div>
+</html>

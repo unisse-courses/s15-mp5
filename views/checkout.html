@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>PHARMAGO - Checkout</title>
+    <style>
+        .bg-grey {
+            background-color: #FAFAF9;
+        }
+
+        #buttons {
+            width: auto;
+        }
+
+        #cancel {
+            margin-right: 1.5em;
+        }
+
+        .orderli {
+            display: grid;
+            grid-template-columns: 70% 5% 25%;
+            grid-column-gap: 1em;
+        }
+
+        ul {
+            margin-left: -1em;
+        }
+
+        #totalcost {
+            display: grid;
+            grid-template-columns: 65% 10% 25%;
+            grid-column-gap: 1em;
+            margin-top: 1em;
+            margin-bottom: -1em;
+        }
+
+        #totalp {
+            margin-left: 1em;
+        }
+
+        .itemPicture {
+            height: 75px;
+            width: 75px;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <div class='row'>
+            <div class='col-7 col-md-8 col-lg-9'>
+                <img src='../assets/pharmago-logo.png' height='30px' onclick="location.href='catalogue.html'">
+            </div>
+            <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
+                <button onclick="location.href='admin.html'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
+                    Admin
+                </button>
+                <div class='col-8 float-right text-right px-0'>
+                    John Doe
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid" id="ordercont">
+                    <h2>Order Summary</h2>
+                    <div class="jumbotron bg-grey" id="orderbox">
+                        <div class='row my-4'>
+                            <div class='media border container rounded'>
+                                <img class="d-flex mr-3 itemPicture" src="../assets/kirkland-vitc.png" alt="Generic placeholder image">
+                                <div class="media-body my-auto d-flex">
+                                    <div class='col-7 text-left'>
+                                        <div class='row'>
+                                            Kirkland Vitamin-C
+                                        </div>
+                                        <div class='row itemPrice'>
+                                            PHP 200.00 X 2
+                                        </div>
+                                    </div>
+                                    <div class='col-5 float-right text-right'>600.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class='row my-4'>
+                            <div class='media border container rounded'>
+                                <img class="d-flex mr-3 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
+                                <div class="media-body my-auto d-flex">
+                                    <div class='col-7 text-left'>
+                                        <div class='row'>
+                                            Kirkland Vitamin-D
+                                        </div>
+                                        <div class='row itemPrice'>
+                                            PHP 300.00 X 3
+                                        </div>
+                                    </div>
+                                    <div class='col-5 float-right text-right'>900.00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='row my-4'>
+                            <div class='media border container rounded'>
+                                <img class="d-flex mr-3 itemPicture" src="../assets/kirkland-vite.png" alt="Generic placeholder image">
+                                <div class="media-body my-auto d-flex">
+                                    <div class='col-7 text-left'>
+                                        <div class='row'>
+                                            Kirkland Vitamin-E
+                                        </div>
+                                        <div class='row itemPrice'>
+                                            PHP 500.00 X 1
+                                        </div>
+                                    </div>
+                                    <div class='col-5 float-right text-right'>100.00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>Delivery Charge</h5>
+                            </div>
+                            <h6>PHP</h6>
+                            <h6>50.00</h6>
+                        </div>
+                        
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>TOTAL</h5>
+                            </div>
+                            <h6>PHP</h6>
+                            <h6>2050.00</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid" id="accountcont">
+                    <h2>Personal Information</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <div id="acctformcont" class="container">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input class="form-control" type="text" id="name" value='John Doe' placeholder="Full Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input class="form-control" type="email" id="email" value='john.doe@gmail.com' placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Contact Number</label>
+                                <input class="form-control" type="email" id="number" value='+63 917 123 4567' placeholder="Contact Number">
+                            </div>
+                            <div class="form-group">
+                                <label for="add1">Address Line 1</label>
+                                <input class="form-control" type="text" id="add1" value='123 Main St.' placeholder="Unit / Block no., Street no., Subd.,">
+                            </div>
+                            <div class="form-group">
+                                <label for="add2">Address Line 2</label>
+                                <input class="form-control" type="text" id="add2" value='Manila City, Metro Manila'placeholder="Brgy., Municipality, City / Province, Region">
+                            </div>
+                            <div class='font-weight-bold'>Payment Method</div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Cash on Delivery</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row jumbotron mx-1 d-block py-5'>
+            <h1>Guidelines</h1>
+            <p>These are some guidelines for delivering.
+            <ol>
+                <li>Deliveries will take at most 1 week in the Metro Manila areas and 2-3 weeks outside the Metro Manila area.</li>
+                <li>Please prepare the exact amount during payment. We cannot assure change.</li>
+            </ol>
+            </p>
+            <button class='btn btn-success border-0' onclick="location.href='catalogue.html'">Proceed with Delivery</button>
+        </div>
+    </div>
+
+    <div class='footer text-center py-5 bg-dark text-white mt-5'>
+        <img src='../assets/pharmago-logo.png' height='40px'> <br><br>
+        CCAPDEV Requirement
+        <br>Cansana. Dela Cruz. Jamalul.
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

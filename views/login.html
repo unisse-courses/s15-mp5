@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMAGO - Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .login
+        {
+            width: 500px;
+        }
+
+        .vertical-center
+        {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .bg-grey {
+            background-color: #FAFAF9;
+        }
+    </style>
+</head>
+<body>
+    <div class='container vertical-center'>
+        <div class='container bg-grey mx-auto login'>
+            <div class="row d-flex align-items-center mt-5">
+                <img src='../assets/pharmago-logo.png' class='mx-auto' height='50px'>
+            </div>
+            <form class='m-5' action="catalogue.html">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Email Address</label>
+                  <input type="email" class="form-control" id="formGroupExampleInput" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                  <label for="formGroupExampleInput2">Password</label>
+                  <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+                </div>
+                <button type='submit' class='btn btn-primary'>Login</button>
+            </form>
+            <div class='row mx-5 my-5 d-flex align-items-center'>
+                <span class='text-center'>Don't have an account? <a href='register.html'>Register now.</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class='footer text-center py-5 bg-dark text-white mt-5'>
+        <img src='../assets/pharmago-logo.png' height='40px'> <br><br>
+        CCAPDEV Requirement
+        <br>Cansana. Dela Cruz. Jamalul.
+    </div>
+</body>
+</html>
