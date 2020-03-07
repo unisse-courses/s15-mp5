@@ -1,1 +1,4 @@
-# s15-mp5
+# PharmaGO
+
+## Team Members:
+* Dela Cruz, Alexis Louis
