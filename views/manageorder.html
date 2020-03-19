@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMAGO - Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .form-control {
+            border: 0 0 1px 0;
+        }
+
+        .itemPicture {
+            width: 150px;
+            height: 150px;
+        }
+
+        .bg-blue,
+        .bg-lightblue {
+            background-color: #9EC9E1;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <nav class='row d-block d-md-none navbar fixed-top navbar-dark bg-blue'>
+        <img class='d-flex float-left mt-1 ml-2' src='../assets/pharmago-logo.png' height='30px'>
+        <button class="navbar-toggler mr-3 d-flex float-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span class='clearfix'></span>
+        <div class="navbar-collapse collapse" id="navbar" data-toggle='collapse'>
+            <ul class="navbar-nav mr-auto ml-3">
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin.html">Admin <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class='mx-auto container'>
+        <div class='row d-none d-md-flex'>
+            <div class='col-7 col-md-8 col-lg-9'>
+                <img src='../assets/pharmago-logo.png' height='30px' onclick="location.href='catalogue.html'">
+            </div>
+            <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
+                <button onclick="location.href='admin.html'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
+                    Admin
+                </button>
+                <div class='col-8 float-right text-right px-0'>
+                    John Doe
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class='row mt-3'>
+            <div class="container"><h3>Orders</h3></div>
+            
+        </div>
+        <div class='row my-3'>
+            <div class='container-fluid border rounded p-4'>
+                <div class="row">
+                    <div class="col-5">
+                        <h5>ORDER#: 12345</h5>
+                        <span class='font-weight-bold'>John Doe</span> - <span class='text-success'>Active</span> <br>
+                        <span>+63 917 123 4567 - john.doe@gmail.com</span> <br>
+                        <span>123 Main St., Manila City, Metro Manila</span>
+                        <br><br>
+                        <span class='font-weight-bold'>DATE ORDERED:</span> 02/01/2020 <br>
+                        <span class='font-weight-bold'>DATE ESTIMATED:</span> 02/07/2020
+
+                        <div class="dropdown mt-3">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Change Order Status
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="statusMenu">
+                                <a class="dropdown-item">Active</a>
+                                <a class="dropdown-item">Hold</a>
+                                <a class="dropdown-item">Cancelled</a>
+                                <a class="dropdown-item">Delivered</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-7'>
+                        <table class="table">
+                            <col width="180">
+                            <col width="30">
+                            <thead>
+                                <tr>
+                                    <th>TOTAL</th>
+                                    <th>PHP 1700.00</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kirkland Vitamin-C (PHP 200.00 X 2)</td>
+                                    <td>400.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirkland Vitamin-D (PHP 300.00 X 1)</td>
+                                    <td>300.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirkland Vitamin-E (PHP 500.00 X 2)</td>
+                                    <td>1000.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row my-4'>
+            <div class='container-fluid border rounded p-4'>
+
+                <div class="row">
+                    <div class="col-5">
+                        <h5>ORDER#: 12344</h5>
+                        <span class='font-weight-bold'>John Doe</span> - <span class='text-secondary'>Delivered</span><br>
+                        <span>+63 917 123 4567 - john.doe@gmail.com</span> <br>
+                        <span>123 Main St., Manila City, Metro Manila</span>
+                        <br><br>
+                        <span class='font-weight-bold'>DATE ORDERED:</span> 01/21/2020 <br>
+                        <span class='font-weight-bold'>DATE ESTIMATED:</span> 01/28/2020
+
+                        <div class="dropdown mt-3">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Change Order Status
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="statusMenu">
+                                <a class="dropdown-item">Active</a>
+                                <a class="dropdown-item">Hold</a>
+                                <a class="dropdown-item">Cancelled</a>
+                                <a class="dropdown-item">Delivered</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-7'>
+                        <table class="table">
+                            <col width="180">
+                            <col width="30">
+                            <thead>
+                                <tr>
+                                    <th>TOTAL</th>
+                                    <th>PHP 2500.00</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kirkland Vitamin-E (PHP 500.00 X 5)</td>
+                                    <td>2500.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='footer text-center py-5 bg-dark text-white mt-5'>
+        <img src='../assets/pharmago-logo.png' height='40px'> <br><br>
+        CCAPDEV Requirement
+        <br>Cansana. Dela Cruz. Jamalul.
+    </div>
+</body></html>

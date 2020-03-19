@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMAGO - Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .form-control {
+            border: 0 0 1px 0;
+        }
+
+        .itemPicture {
+            width: 150px;
+            height: 150px;
+        }
+
+        .bg-blue,
+        .bg-lightblue {
+            background-color: #9EC9E1;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <br>
+    <nav class='row d-block d-md-none navbar fixed-top navbar-dark bg-blue'>
+        <img class='d-flex float-left mt-1 ml-2' src='../assets/pharmago-logo.png' height='30px'>
+        <button class="navbar-toggler mr-3 d-flex float-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span class='clearfix'></span>
+        <div class="navbar-collapse collapse" id="navbar" data-toggle='collapse'>
+            <ul class="navbar-nav mr-auto ml-3">
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin.html">Admin <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class='mx-auto container'>
+        <div class='row d-none d-md-flex'>
+            <div class='col-7 col-md-8 col-lg-9'>
+                <img src='../assets/pharmago-logo.png' height='30px' onclick="location.href='catalogue.html'">
+            </div>
+            <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
+                <button onclick="location.href='admin.html'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
+                    Admin
+                </button>
+                <div class='col-8 float-right text-right px-0'>
+                    John Doe
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class='row mt-3 ml-1'>
+            <h3>Edit Items</h3>
+        </div>
+        <div class='row ml-1'>
+            <button class='btn btn-success'>Add Item</button>
+        </div>
+        <br>
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitc.png" alt="Generic placeholder image">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Kirkland Vitamin-C' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="text" class="form-control font-weight-bold" value='200.00' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <button class='btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='btn btn-danger mx-2'>Delete Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Kirkland Vitamin-D' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="text" class="form-control font-weight-bold" value='300.00' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <button class='btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='btn btn-danger mx-2'>Delete Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vite.png" alt="Generic placeholder image">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Kirkland Vitamin-E' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="text" class="form-control font-weight-bold" value='500.00' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <button class='btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='btn btn-danger mx-2'>Delete Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/enervon-vitc.png" alt="Generic placeholder image">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Enervon Vitamin-C' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="text" class="form-control font-weight-bold" value='150.00' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <button class='btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='btn btn-danger mx-2'>Delete Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/biogesic-paracetamol.png" alt="Generic placeholder image">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Biogesic Paracetamol' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="text" class="form-control font-weight-bold" value='300.00' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <button class='btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='btn btn-danger mx-2'>Delete Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='footer text-center py-5 bg-dark text-white mt-5'>
+        <img src='../assets/pharmago-logo.png' height='40px'> <br><br>
+        CCAPDEV Requirement
+        <br>Cansana. Dela Cruz. Jamalul.
+    </div>
+</body></html>
