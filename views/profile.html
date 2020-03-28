@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMAGO - Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="../functions.js"></script>
+
+    <style>
+        .bg-grey {
+            background-color: #FAFAF9;
+        }
+
+        #error{
+            color: darkred;
+            font-size: 10px;
+        }
+        #btnCancel{
+            display: none;
+        }
+
+        #btnConfirm{
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <div class='row'>
+            <div class='col-7 col-md-8 col-lg-9'>
+                <img src='../assets/pharmago-logo.png' height='30px' onclick="location.href='catalogue.html'">
+            </div>
+            <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
+                <button onclick="location.href='profile.html'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
+                    Profile
+                </button>
+                <div class='col-8 float-right text-right px-0'>
+                    John Doe
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid" id="accountcont">
+                    <h2>Personal Information</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <div id="acctformcont" class="container">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input class="form-control" type="text" id="name" value='John Doe' placeholder="Full Name" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input class="form-control" type="email" id="email" value='john.doe@gmail.com' placeholder="Email" readonly>
+                            </div>
+                          
+                            <div class="form-group">
+                                <label for="number">Contact Number</label>
+                                <input class="form-control" type="text" id="number" value='09175666242' pattern="^(09)\d{9}$"
+                                    placeholder="Contact Number" readonly>
+                                <span id="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="add1">Address Line 1</label>
+                                <input class="form-control" type="text" id="add1" value='123 Main St.' placeholder="Unit / Block no., Street no., Subd.," readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="add2">Address Line 2</label>
+                                <input class="form-control" type="text" id="add2" value='Manila City, Metro Manila'placeholder="Brgy., Municipality, City / Province, Region" readonly>
+                            </div>
+                            <div class="container row">
+                                <button id="btnEdit" class="col-3 offset-4 btn btn-secondary">Edit</button>
+                                <button id="btnCancel" class="col-3 offset-4 btn btn-danger">Cancel</button>
+                                <button id="btnConfirm" class="col-3 offset-2 btn btn-success">Confirm</button>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
