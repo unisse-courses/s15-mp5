@@ -1,0 +1,111 @@
+<div class='mx-auto container'>
+    <div class='row'>
+        <div class='col-12 col-lg-9'>
+            <div class='d-none d-md-block jumbrotron rounded bg-lightblue'>
+                <img class='d-flex mx-auto py-5' src='pharmago-logo.png'>
+            </div>
+
+            <div class="row my-3 d-flex">
+
+                {{#each catalogue}}
+                
+                <div class="col-8 offset-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3">
+                    <div class='item card border-0 my-3' value='0'>
+                        <div class="card-body">
+                            <div class="itemPictureHolder rounded text-center">
+                                    <img src='{{itemPicture}}' class='itemPicture'>
+                            </div>
+                            <div class='row itemFooter ml-2'>
+                                <div class='col itemDescription mt-1'>
+                                    <div class='row'>{{itemName}}</div>
+                                    <div class='row itemPrice'>PHP {{itemPrice}}</div>
+                                </div>
+                                <div class='col addToCart mt-1'>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="btn bg-blue">-</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="0" aria-label=""
+                                            aria-describedby="basic-addon1" size='2'>
+                                        <div class="input-group-append">
+                                            <button class="btn bg-blue">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {{/each}}
+            </div>
+        </div>
+        <div class='col-12 col-lg-3'>
+            <div class='card bg-grey border-0 rounded'>
+                <div class='card-body'>
+                    <!-- Dynamic content: Add to div via JS-->
+                    <div class='card-title'>
+                        Shopping Cart
+                    </div>
+                    <!-- TEMPLATE FOR SHOPPING CART ITEMS
+
+                    <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
+                        <div class='col-7 text-left'>
+                            <div class='row'>
+                                Kirkland Vitamin-D
+                            </div>
+                            <div class='row'>
+                                PHP 300.00 X 3
+                            </div>
+                        </div>
+                        <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>900.00</div>
+                    </div>
+
+                    -->
+                
+                    <div class='d-flex container px-1'>
+                        <div class='col-5 text-left'>
+                            <div class='row font-weight-bold'>
+                                TOTAL
+                            </div>
+                        </div>
+                        <!-- Dynamic content: Compute total from item prices * quantity -->
+                        <div class='col-7 float-right text-right itemPrice'>0.00</div>
+                    </div>
+                </div>
+                <button class='btn btn-primary bg-lightblue card-footer border-0' onclick="location.href='/checkout'">Checkout</button>
+            </div>
+            <div class='card bg-grey border-0 rounded mt-4'>
+                <div class='card-body'>
+                    <div class='card-title'>
+                        Past Orders
+                    </div>
+                    <!-- Change to a clickable: Redirect to checkout page with items of this order -->
+                    <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
+                        <div class='col-7 text-left'>
+                            <div class='row'>
+                                February 3, 2020
+                            </div>
+                            <!-- Change to first item of the order-->
+                            <div class='row itemPrice'>
+                                PHP 1700.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(() => {
+        $(".item").hover(function () {
+            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "none");
+            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "block");
+        }, function () {
+            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "block");
+            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "none");
+        })
+    });
+</script>

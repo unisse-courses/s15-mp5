@@ -1,0 +1,37 @@
+<br>
+<nav class='row d-block d-md-none navbar fixed-top navbar-dark bg-blue mb-5'>
+    <img class='d-flex float-left mt-1 ml-2' src='pharmago-logo.png' height='30px'>
+    <button class="navbar-toggler mr-3 d-flex float-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class='clearfix'></span>
+    <div class="navbar-collapse collapse" id="navbar" data-toggle='collapse'>
+        <ul class="navbar-nav mr-auto ml-3">
+            <li class="nav-item active">
+                <a class="nav-link" href="admin.html">Admin <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile"><img class='rounded-circle mr-3' src='boy-profile.png' href='/profile' height='30px'> John Doe
+                <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="mx-auto container">
+    <div class='row d-none d-md-flex mb-4'>
+        <div class='col-7 col-md-8 col-lg-9'>
+            <img src='pharmago-logo.png' height='30px' onclick="location.href='/catalogue'">
+        </div>
+        <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
+            <button onclick="location.href='<!-- Add new admin hub -->'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
+                Admin
+            </button>
+            <div class='col-8 float-right text-right px-0'>
+                <button onclick="location.href='/profile'" type="button" class='col-8 btn p-0'>
+                    <span class='float-left'>John Doe</span>
+                    <img class='rounded-circle float-right' src='boy-profile.png' height='30px'>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
