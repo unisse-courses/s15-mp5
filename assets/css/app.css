@@ -87,3 +87,19 @@ ul {
 .bg-grey {
     background-color: #FAFAF9;
 }
+
+#error{
+    color: darkred;
+    font-size: 10px;
+}
+#btnCancel{
+    display: none;
+}
+
+#btnConfirm{
+    display: none;
+}
+
+.form-control {
+    border: 0 0 1px 0;
+}

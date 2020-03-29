@@ -58,5 +58,25 @@ app.get('/checkout', (req,res) => {
     })
 })
 
+app.get('/profile', (req,res) => {
+    res.render('profile', {title: 'Profile',
+    fullName: "John Doe",
+    email: "john.doe@gmail.com",
+    contactNumber: "09175666242",
+    addressLine1: "123 Main St.",
+    addressLine2: "Manila City, Metro Manila"
+    })
+})
+
+app.get('/manageorder', (req,res) => {
+    res.render('manageorder', {title: 'Admin - Manage Orders'
+    })
+})
+
+app.get('/managecatalogue', (req,res) => {
+    res.render('managecatalogue', {title: 'Admin - Manage Catalogue'
+    })
+})
+
 app.listen(port, () => console.log(`Listening to port ${port}... Press Ctrl+C to exit.`));
 
