@@ -105,7 +105,16 @@ app.get('/manageorder', (req,res) => {
 })
 
 app.get('/managecatalogue', (req,res) => {
-    res.render('managecatalogue', {title: 'Admin - Manage Catalogue'
+    res.render('managecatalogue', {
+        title: 'Admin - Manage Catalogue',
+        products: [
+            {
+                picture: './assets/kirkland-vitd.png',
+                name: 'Kirkland Vitamin-D',
+                price: '300.00'
+            }
+        ]
+        
     })
 })
 
