@@ -1,168 +1,155 @@
+
 <div class='mx-auto container'>
-<div class='row mt-3 ml-1'>
-            <h3>Edit Items</h3>
-        </div>
-<div class='row ml-1'>
-    <button class='btn btn-success'>Add Item</button>
-</div>
-<br>
-    <div class='row mt-2 mb-4'>
-        <div class='row media border container rounded'>
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitc.png" alt="Generic placeholder image">
+    <div class='row mt-3 ml-1'>
+                <h3>Edit Items</h3>
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Item Name</span>
-                            </div>
-                            <input type="text" class="form-control" value='Kirkland Vitamin-C' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
-                    <div class="col-lg-4 mt-xs-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Price</span>
-                            </div>
-                            <input type="text" class="form-control font-weight-bold" value='200.00' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <button class='btn btn-light border mx-2'>Edit Icon</button>
-                    <button class='btn btn-danger mx-2'>Delete Item</button>
-                </div>
-            </div>
-        </div>
+    <div id="btnAdd" class='row ml-1'>
+        <button class='btn btn-success'>Add Item</button>
     </div>
-    <div class='row mt-2 mb-4'>
-        <div class='row media border container rounded'>
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Item Name</span>
-                            </div>
-                            <input type="text" class="form-control" value='Kirkland Vitamin-D' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
-                    <div class="col-lg-4 mt-xs-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Price</span>
-                            </div>
-                            <input type="text" class="form-control font-weight-bold" value='300.00' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
+    <br>
+        <div id="template" class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
                 </div>
-                <div class="row mt-2">
-                    <button class='btn btn-light border mx-2'>Edit Icon</button>
-                    <button class='btn btn-danger mx-2'>Delete Item</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class='row mt-2 mb-4'>
-        <div class='row media border container rounded'>
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vite.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Item Name</span>
-                            </div>
-                            <input type="text" class="form-control" value='Kirkland Vitamin-E' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1">
+                            </div>          
+                        </div>
                     </div>
-                    <div class="col-lg-4 mt-xs-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Price</span>
-                            </div>
-                            <input type="text" class="form-control font-weight-bold" value='500.00' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
+                    <div class="row mt-2">
+                        <button  class='edit btn btn-light border mx-2'>Edit</button>
+                        <button class='editicon btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='delete btn btn-danger mx-2'>Delete Item</button>
+                        <button class='cancel btn btn-light border mx-2'>Cancel</button>
+                        <button class='confirm btn btn-success border mx-2'>Confirm</button>
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <button class='btn btn-light border mx-2'>Edit Icon</button>
-                    <button class='btn btn-danger mx-2'>Delete Item</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class='row mt-2 mb-4'>
-        <div class='row media border container rounded'>
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                <img class="rounded mr-2 itemPicture" src="../assets/enervon-vitc.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Item Name</span>
-                            </div>
-                            <input type="text" class="form-control" value='Enervon Vitamin-C' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
-                    <div class="col-lg-4 mt-xs-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Price</span>
-                            </div>
-                            <input type="text" class="form-control font-weight-bold" value='150.00' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
-                    </div>
+        <div class='row mt-2 mb-4'>
+            <div class='row media border container rounded'>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
                 </div>
-                <div class="row mt-2">
-                    <button class='btn btn-light border mx-2'>Edit Icon</button>
-                    <button class='btn btn-danger mx-2'>Delete Item</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class='row mt-2 mb-4'>
-        <div class='row media border container rounded'>
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                <img class="rounded mr-2 itemPicture" src="../assets/biogesic-paracetamol.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Item Name</span>
-                            </div>
-                            <input type="text" class="form-control" value='Biogesic Paracetamol' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Name</span>
+                                </div>
+                                <input type="text" class="form-control" value='Kirkland Vitamin-D' aria-label="" aria-describedby="basic-addon1" readonly>
+                            </div>          
+                        </div>
+                        <div class="col-lg-4 mt-xs-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Price</span>
+                                </div>
+                                <input type="number" class="form-control font-weight-bold" value='300.00' aria-label="" aria-describedby="basic-addon1" readonly>
+                            </div>          
+                        </div>
                     </div>
-                    <div class="col-lg-4 mt-xs-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Price</span>
-                            </div>
-                            <input type="text" class="form-control font-weight-bold" value='300.00' aria-label="" aria-describedby="basic-addon1">
-                        </div>          
+                    <div class="row mt-2">
+                        <button  class='edit btn btn-light border mx-2'>Edit</button>
+                        <button class='editicon btn btn-light border mx-2'>Edit Icon</button>
+                        <button class='delete btn btn-danger mx-2'>Delete Item</button>
+                        <button class='cancel btn btn-light border mx-2'>Cancel</button>
+                        <button class='confirm btn btn-success border mx-2'>Confirm</button>
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <button class='btn btn-light border mx-2'>Edit Icon</button>
-                    <button class='btn btn-danger mx-2'>Delete Item</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+<script>
+    $(document).ready( function(){
+
+        var name;
+        var price;
+        var targetInputs;
+        $("#template").hide();
+        $(".cancel").hide();
+        $(".confirm").hide();
+        $(".editicon").hide();
+
+        $("body").on("click", ".edit", function(){
+            
+            targetInputs = $(this).parent().parent().find("input");
+            name = targetInputs[0].getAttribute("value");
+            price = targetInputs[1].getAttribute("value");
+
+            $(this).parent().children().filter(".edit").hide();
+            $(this).parent().children().filter(".cancel").show();
+            $(this).parent().children().filter(".delete").hide();
+            $(this).parent().children().filter(".confirm").show();
+            $(this).parent().children().filter(".editicon").show();
+
+            for(i=0; i<targetInputs.length; i++)
+            {
+                targetInputs[i].removeAttribute("readonly")
+            }
+        });
+        
+        $("body").on("click", ".cancel", function(){
+            targetInputs = $(this).parent().parent().find("input");
+            for(i=0; i<targetInputs.length; i++)
+            {
+                targetInputs[i].setAttribute("readonly", true);
+            }
+            targetInputs[0].value = name;
+            targetInputs[1].value = price;
+            $(this).parent().children().filter(".edit").show();
+            $(this).parent().children().filter(".cancel").hide();
+            $(this).parent().children().filter(".delete").show();
+            $(this).parent().children().filter(".confirm").hide();
+            $(this).parent().children().filter(".editicon").hide();
+        });
+
+        $("body").on("click", ".delete", function(){
+            targetDiv = $(this).parent().parent().parent().parent().remove();
+        });
+
+        $("body").on("click", ".confirm", function(){
+             targetInputs = $(this).parent().parent().find("input");
+            for(i=0; i<targetInputs.length; i++)
+            {
+                targetInputs[i].setAttribute("readonly", true);
+            }
+            $(".cancel").hide();
+            $(".edit").show();
+            $(".delete").show();
+            $(".editicon").hide();
+            $(".confirm").hide();
+            $(this).parent().children().filter(".edit").show();
+            $(this).parent().children().filter(".cancel").hide();
+            $(this).parent().children().filter(".delete").show();
+            $(this).parent().children().filter(".confirm").hide();
+            $(this).parent().children().filter(".editicon").hide();
+        });
+
+        $("#btnAdd").click( function(){
+            clone = $("#template").clone().show();
+            $(this).parent().append(clone);
+        });
+   
+
+    });
+
+</script>
