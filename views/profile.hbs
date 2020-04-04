@@ -1,3 +1,56 @@
+<script>
+$(document).ready(function(){
+
+    var num;
+    var add1;
+    var add2;
+
+    $("#btnEdit").click(function(){
+        num = $("#number").val();
+        add1 = $("#add1").val();
+        add2 = $("#add2").val();
+        $(this).hide();
+        $("#number").prop("readonly", false);
+        $("#add1").prop("readonly", false);
+        $("#add2").prop("readonly", false);
+        $("#btnCancel").css("display","block");
+        $("#btnConfirm").css("display","block");
+    });
+
+    $("#btnCancel").click(function(){
+        $("#btnCancel").css("display","none");
+        $("#btnConfirm").css("display","none");
+        $("#btnEdit").show();
+        $("#number").val(num);
+        $("#add1").val(add1);
+        $("#add2").val(add2);
+        $("#error").text("");
+    });
+
+    $("#btnConfirm").click(function(){
+
+        var num = $("#number").val();
+        console.log(num);
+        var regex = /^(09)\d{9}$/;
+        if( regex.test(num) == false )
+        {
+            $("#error").text("Must be in 11-digit form: 09XXXXXXXXX");
+        }
+        else
+        {
+            $("#error").text("");
+            $("#btnCancel").css("display","none");
+            $("#btnConfirm").css("display","none");
+            $("#btnEdit").show();
+            $("#number").prop("readonly", true);
+            $("#add1").prop("readonly", true);
+            $("#add2").prop("readonly", true);
+        }
+        
+    });
+});
+</script>
+
 <div class="container">
     <div class="row mt-4">
         <div class="col-sm-12 col-md-12 col-lg-6 px-0">
@@ -18,7 +71,7 @@
                             <label for="number">Contact Number</label>
                             <input class="form-control" type="text" id="number" value='{{contactNumber}}' pattern="^(09)\d{9}$"
                                 placeholder="Contact Number" readonly>
-                            <span id="error" class='text-danger'></span>
+                            <span id="error"></span>
                         </div>
                         <div class="form-group">
                             <label for="add1">Address Line 1</label>
@@ -26,16 +79,18 @@
                         </div>
                         <div class="form-group">
                             <label for="add2">Address Line 2</label>
-                            <input class="form-control" type="text" id="add2" value='{{addressLine2}}' placeholder="Brgy., Municipality, City / Province, Region" readonly>
+                            <input class="form-control" type="text" id="add2" value='{{addressLine2}}'placeholder="Brgy., Municipality, City / Province, Region" readonly>
                         </div>
                         <div class="container row">
                             <button id="btnEdit" class="col-3 offset-4 btn btn-secondary">Edit</button>
-                            <button id="btnCancel" class="col-3 offset-4 btn btn-danger" style='display: none;'>Cancel</button>
-                            <button id="btnConfirm" class="col-3 offset-2 btn btn-success" style='display: none;'>Confirm</button>
-                        </div>           
+                            <button id="btnCancel" class="col-3 offset-4 btn btn-danger">Cancel</button>
+                            <button id="btnConfirm" class="col-3 offset-2 btn btn-success">Confirm</button>
+                        </div>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

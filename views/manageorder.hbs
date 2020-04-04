@@ -1,0 +1,70 @@
+<div class='mx-auto container'>
+    {{#each orders}}
+    <div class='row my-3'>
+        <div class='container-fluid border rounded p-4'>
+            <div class="row">
+                <div class="col-5">
+                    <h5>ORDER#: {{orderno}}</h5>
+                    <span class='font-weight-bold'>John Doe</span> - <span class='text-success'>{{status}}</span> <br>
+                    <span>+63 917 123 4567 - {{buyeremail}}</span> <br>
+                    <span>123 Main St., Manila City, Metro Manila</span>
+                    <br><br>
+                    <span class='font-weight-bold'>DATE ORDERED:</span> {{dateoforder}} <br>
+                    <span class='font-weight-bold'>DATE ESTIMATED:</span> {{dateofdeliver}}
+
+                    <div class="dropdown mt-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Change Order Status
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="statusMenu">
+                            <a class="dropdown-item">Active</a>
+                            <a class="dropdown-item">Hold</a>
+                            <a class="dropdown-item">Cancelled</a>
+                            <a class="dropdown-item">Delivered</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='col-7'>
+                    <table class="table">
+                        <col width="180">
+                        <col width="30">
+                        <thead>
+                            <tr>
+                                <th>TOTAL</th>
+                                <th>{{totalprice}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orderitems}}
+                            <tr>
+                                <td>{{name}} (PHP <span class="price">{{price}}</span> X <span class="quantity">{{quantity}}</span>)</td>
+                                <td><span class="total"></span></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+    $(document).ready( function(){
+
+        var arr = $(".total")
+        var p;
+        var q;
+        for(i=0; i<arr.length; i++)
+        {
+            p = $(arr[i]).parent().parent().children().children().filter(".price").text()
+            q = $(arr[i]).parent().parent().children().children().filter(".quantity").text()
+            console.log(p)
+            $(arr[i]).text("" + p * q + ".00")
+            
+            
+        }
+    })
+</script>

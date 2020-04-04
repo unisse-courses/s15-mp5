@@ -1,10 +1,13 @@
 $(document).ready(function(){
 
-    var num = $("#number").val();
-    var add1 = $("#add1").val();
-    var add2 = $("#add2").val();
+    var num;
+    var add1;
+    var add2;
 
     $("#btnEdit").click(function(){
+        num = $("#number").val();
+        add1 = $("#add1").val();
+        add2 = $("#add2").val();
         $(this).hide();
         $("#number").prop("readonly", false);
         $("#add1").prop("readonly", false);
@@ -38,8 +41,10 @@ $(document).ready(function(){
             $("#btnCancel").css("display","none");
             $("#btnConfirm").css("display","none");
             $("#btnEdit").show();
+            $("#number").prop("readonly", true);
+            $("#add1").prop("readonly", true);
+            $("#add2").prop("readonly", true);
         }
         
     });
 });
-

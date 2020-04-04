@@ -8,26 +8,31 @@
     <div class="navbar-collapse collapse" id="navbar" data-toggle='collapse'>
         <ul class="navbar-nav mr-auto ml-3">
             <li class="nav-item active">
-                <a class="nav-link" href="admin.html">Admin <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/manageorder">Orders<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/profile"><img class='rounded-circle mr-3' src='boy-profile.png' href='/profile' height='30px'> John Doe
-                <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/managecatalogue">Catalogue<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="mx-auto container">
     <div class='row d-none d-md-flex mb-4'>
-        <div class='col-7 col-md-8 col-lg-9'>
+        <div class='col-4 col-lg-6'>
             <img src='pharmago-logo.png' height='30px' onclick="location.href='/catalogue'">
         </div>
-        <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
-            <button onclick="location.href='<!-- Add new admin hub -->'" type="button" class='col-4 text-center btn btn-outline-dark rounded float-left'>
-                Admin
+        <div class='col-8 col-lg-6 d-flex align-items-center'>
+            <button onclick="location.href='/manageorder'" type="button" class='mr-2 col-3 text-center btn btn-outline-dark rounded float-left'>
+                Orders
             </button>
-            <div class='col-8 float-right text-right px-0'>
-                <button onclick="location.href='/profile'" type="button" class='col-8 btn p-0'>
+            <button onclick="location.href='/managecatalogue'" type="button" class='col-3 text-center btn btn-outline-dark rounded float-left'>
+                Catalogue
+            </button>
+            <div class='col-6 float-right text-right px-0'>
+                <button onclick="location.href='/profile'" type="button" class='col-6 btn p-0'>
                     <span class='float-left'>John Doe</span>
                     <img class='rounded-circle float-right' src='boy-profile.png' height='30px'>
                 </button>
