@@ -1,8 +1,8 @@
 <div class='mx-auto container'>
     <div class='row'>
         <div class='col-12 col-lg-9'>
-            <div class='d-none d-md-block jumbrotron rounded bg-lightblue'>
-                <img class='d-flex mx-auto py-5' src='pharmago-logo.png'>
+            <div class='d-none d-md-block jumbrotron rounded bg-lightblue py-5'>
+                Ad Space
             </div>
 
             <div class="row my-3 d-flex">
@@ -10,25 +10,25 @@
                 {{#each catalogue}}
                 
                 <div class="col-8 offset-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3">
-                    <div class='item card border-0 my-3' value='0'>
+                    <div class='item card border-0 my-3' data-value="{{productno}}">
                         <div class="card-body">
                             <div class="itemPictureHolder rounded text-center">
                                     <img src='{{itemPicture}}' class='itemPicture'>
                             </div>
                             <div class='row itemFooter ml-2'>
                                 <div class='col itemDescription mt-1'>
-                                    <div class='row'>{{itemName}}</div>
-                                    <div class='row itemPrice'>PHP {{itemPrice}}</div>
+                                    <div class='row itemName'>{{itemName}}</div>
+                                    <div class='row itemPrice' data-value="{{itemPrice}}">PHP {{itemPrice}}</div>
                                 </div>
                                 <div class='col addToCart mt-1'>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn bg-blue">-</button>
+                                            <button class="btn bg-blue subtract">-</button>
                                         </div>
-                                        <input type="text" class="form-control" value="0" aria-label=""
+                                        <input type="text" class="form-control quantity-field" value="0" aria-label=""
                                             aria-describedby="basic-addon1" size='2'>
                                         <div class="input-group-append">
-                                            <button class="btn bg-blue">+</button>
+                                            <button class="btn bg-blue add">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -47,6 +47,8 @@
                     <div class='card-title'>
                         Shopping Cart
                     </div>
+
+                    <div id='shoppingCartItems'></div>
                     <!-- TEMPLATE FOR SHOPPING CART ITEMS
 
                     <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
@@ -70,7 +72,7 @@
                             </div>
                         </div>
                         <!-- Dynamic content: Compute total from item prices * quantity -->
-                        <div class='col-7 float-right text-right itemPrice'>0.00</div>
+                        <div class='col-7 float-right text-right totalPrice'>0.00</div>
                     </div>
                 </div>
                 <button class='btn btn-primary bg-lightblue card-footer border-0' onclick="location.href='/checkout'">Checkout</button>
@@ -97,15 +99,3 @@
         </div>
     </div>
 </div>
-
-<script type='text/javascript'>
-    $(document).ready(() => {
-        $(".item").hover(function () {
-            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "none");
-            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "block");
-        }, function () {
-            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "block");
-            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "none");
-        })
-    });
-</script>
