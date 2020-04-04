@@ -7,10 +7,11 @@
         <button class='btn btn-success'>Add Item</button>
     </div>
     <br>
+        <!-- TEMPLATE START -->
         <div id="template" class='row mt-2 mb-4'>
             <div class='row media border container rounded'>
                 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                    <img class="rounded mr-2 itemPicture" src="../assets/kirkland-vitd.png" alt="Generic placeholder image">
+                    <img class="rounded mr-2 itemPicture" src="default.png" alt="Generic placeholder image">
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
                     <div class="row">
@@ -41,6 +42,8 @@
                 </div>
             </div>
         </div>
+        <!-- TEMPLATE END -->
+
         {{#each products}}
         <div class='row mt-2 mb-4'>
             <div class='row media border container rounded'>
@@ -77,6 +80,7 @@
             </div>
         </div>
         {{/each}}
+
     </div>
 </div>
 
