@@ -68,5 +68,55 @@ app.get('/profile', (req,res) => {
     })
 })
 
+app.get('/manageorder', (req,res) => {
+    res.render('manageorder', {
+        title: 'Admin - Manage Orders',
+        orders: [
+            {
+                orderno: "12345",
+                status: "Active",
+                buyeremail: "john.doe@gmail.com",
+                dateoforder: "02/01/2020",
+                dateofdeliver: "02/07/2020",
+                totalprice: "1700.00",
+                orderitems: [
+                    {
+                        name: "Kirkland Vitamin-C",
+                        price: "200.00",
+                        quantity: "2",
+                        total: ""
+                    },
+                    {
+                        name: "Kirkland Vitamin-D",
+                        price: "300.00",
+                        quantity: "1",
+                        total: ""
+                    },
+                    {
+                        name: "Kirkland Vitamin-E",
+                        price: "500.00",
+                        quantity: "2",
+                        total: ""
+                    }
+                ]
+            }
+        ]
+    })
+})
+
+app.get('/managecatalogue', (req,res) => {
+    res.render('managecatalogue', {
+        title: 'Admin - Manage Catalogue',
+        products: [
+            {
+                picture: './assets/kirkland-vitd.png',
+                name: 'Kirkland Vitamin-D',
+                price: '300.00'
+            }
+        ]
+        
+    })
+})
+
 app.listen(port, () => console.log(`Listening to port ${port}... Press Ctrl+C to exit.`));
 
