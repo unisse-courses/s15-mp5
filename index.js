@@ -1,4 +1,8 @@
 const express = require('express');
+const hbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 const app = express();
 
@@ -7,11 +11,11 @@ require('./startup/routes')(app);
 require('./startup/database-connection');
 
 const port = process.env.PORT || 9090;
-var hbs = require('express-handlebars');
 
 app.use(express.static('assets'))
 
 app.engine('hbs', hbs({
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
     extname: 'hbs',
     defaultview: 'main',
     layoutsDir: __dirname + '/views/layouts/',
@@ -24,6 +28,8 @@ app.set('port', process.env.PORT || 9090)
 
 app.use(express.static(__dirname + '/public'))
 
+var shoppingCartItems = null;
+
 app.get('/', (req,res) => {
     res.render('login', {title: 'Login', layout: 'landing'})
 })
@@ -33,30 +39,37 @@ app.get('/register', (req,res) => {
 })
 
 app.get('/catalogue', (req,res) => {
-    res.render('catalogue', {title: 'Pharmago',
-    catalogue: [
-        {productno: "1", itemPicture: "kirkland-vitc.png", itemName: "Kirkland Vitamin-C", itemPrice: "200.00"},
-        {productno: "2", itemPicture: "kirkland-vitd.png", itemName: "Kirkland Vitamin-D", itemPrice: "300.00"},
-        {productno: "3", itemPicture: "kirkland-vite.png", itemName: "Kirkland Vitamin-E", itemPrice: "500.00"},
-        {productno: "4", itemPicture: "enervon-vitc.png", itemName: "Enervon Vitamin-C", itemPrice: "150.00"},
-        {productno: "5", itemPicture: "biogesic-paracetamol.png", itemName: "Biogesic Paracetamol", itemPrice: "300.00"},
-    ]})
+    mongoose.model('products').find({}, (err, products) => {
+        res.render('catalogue', {title: 'Pharmago',
+        catalogue: products,
+        })
+    });
 })
 
-app.get('/checkout', (req,res) => {
-    res.render('checkout', {title: 'Checkout',
-    order: [
-        {itemPicture: "kirkland-vitc.png", itemName: "Kirkland Vitamin-C", itemPrice: "200.00", quantity: "2"},
-        {itemPicture: "kirkland-vitd.png", itemName: "Kirkland Vitamin-D", itemPrice: "300.00", quantity: "2"},
-        {itemPicture: "kirkland-vite.png", itemName: "Kirkland Vitamin-E", itemPrice: "500.00", quantity: "2"},
-    ],
-    fullName: "John Doe",
-    email: "john.doe@gmail.com",
-    contactNumber: "09175666242",
-    addressLine1: "123 Main St.",
-    addressLine2: "Manila City, Metro Manila"
-    })
+app.post('/checkout', (req,res,next) => {
+    shoppingCartItems = req.body;
+    res.send("done")
 })
+
+app.get('/checkout', (req, res) =>
+{
+    var total = 0;
+    for(item of shoppingCartItems)
+    {
+        total += item.itemPrice;
+    }
+    total += 50;
+
+    res.render('checkout', {title: 'Checkout',
+        order: shoppingCartItems,
+        totalPrice: total.toFixed(2),
+        fullName: "John Doe",
+        email: "john.doe@gmail.com",
+        contactNumber: "09175666242",
+        addressLine1: "123 Main St.",
+        addressLine2: "Manila City, Metro Manila"
+    })
+});
 
 app.get('/profile', (req,res) => {
     res.render('profile', {title: 'Profile',

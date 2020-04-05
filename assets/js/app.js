@@ -12,11 +12,12 @@ $(document).ready(function(){
 
     var prevItem = null;
     class cartItem {
-        constructor(productno, name, price, quantity) {
+        constructor(productno, name, price, quantity, itemPrice) {
             this.productno = productno;
             this.name = name;
             this.price = price;
             this.quantity = quantity;
+            this.itemPrice = itemPrice;
         }
     }
     var shoppingCartItems = [];
@@ -41,13 +42,14 @@ $(document).ready(function(){
         }
     });
 
-    function changeShoppingCart(productno, name, price, newQuantity)
+    function changeShoppingCart(productno, name, price, newQuantity, itemPrice)
     {
         var item = shoppingCartItems.find(item => productno == item.productno);
         if (item != null && newQuantity != 0)
         {
             // If its part of the shopping cart, update cart
             item.quantity = newQuantity;
+            item.itemPrice = itemPrice;
         }
         else if (item != null && newQuantity == 0)
         {
@@ -57,7 +59,7 @@ $(document).ready(function(){
         else
         {
             // Item doesn't exist, push to cart
-            var newItem = new cartItem(productno, name, price, newQuantity);
+            var newItem = new cartItem(productno, name, price, newQuantity, itemPrice);
             shoppingCartItems.push(newItem);
         }
 
@@ -67,7 +69,6 @@ $(document).ready(function(){
 
         for(x of shoppingCartItems)
         {
-            var itemTotalPrice = x.price*x.quantity;
             var htmlstring = 
             `
             <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
@@ -79,15 +80,15 @@ $(document).ready(function(){
                         ${x.price} X ${x.quantity}
                     </div>
                 </div>
-                <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>${itemTotalPrice}</div>
+                <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>${x.itemPrice}</div>
             </div>
             `;
 
             $('#shoppingCartItems').append(htmlstring);
-            cartTotalPrice += itemTotalPrice;
+            cartTotalPrice += x.itemPrice;
         }
 
-        $('.totalPrice').html(cartTotalPrice.toFixed(2));
+        $('.totalPrice').html(cartTotalPrice);
         
     }
 
@@ -98,8 +99,9 @@ $(document).ready(function(){
         var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
         var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
         val++;
+        var itemPrice = price*val;
 
-        changeShoppingCart(productno, name, price, val);
+        changeShoppingCart(productno, name, price, val, itemPrice);
 
         $(this).parent().siblings("input").val(val);
         console.log(productno, shoppingCartItems)
@@ -114,8 +116,9 @@ $(document).ready(function(){
             var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
             var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
             val--;
+            var itemPrice = price*val;
 
-            changeShoppingCart(productno, name, price, val);
+            changeShoppingCart(productno, name, price, val, itemPrice);
 
             $(this).parent().siblings("input").val(val);
             console.log(productno, shoppingCartItems);
@@ -130,16 +133,31 @@ $(document).ready(function(){
             var productno = $(this).parents().filter(".item").data('value');
             var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
             var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+            var itemPrice = price*val;
 
-            changeShoppingCart(productno, name, price, val);
+            changeShoppingCart(productno, name, price, val, itemPrice);
 
-            $(this).parent().siblings("input").val(val);
+            $(this).val(val);
             console.log(productno, shoppingCartItems)
         } 
         else
         {
-            $(this).parent().siblings("input").val(0);
+            $(this).val("0");
             console.log(productno, shoppingCartItems);
+        }
+    });
+
+    $("#checkoutButton").click(function() 
+    {
+        if(shoppingCartItems.length != 0)
+        {    
+            $.ajax({
+                url: "/checkout",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(shoppingCartItems),
+                success: function (data) { console.log('POST success!'); window.location.href = "/checkout"; },
+            });
         }
     });
 
