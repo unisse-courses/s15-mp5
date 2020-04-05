@@ -8,11 +8,11 @@ const schema = new mongoose.Schema({
         required: true
     },
     status: {
-        type: Number,
+        type: String,
         required: true
     },
     buyer: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'accounts',
         required: true
     },

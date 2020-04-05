@@ -1,16 +1,17 @@
 <div class='mx-auto container'>
+    <div class="container"><h3>Orders</h3></div>
     {{#each orders}}
     <div class='row my-3'>
         <div class='container-fluid border rounded p-4'>
             <div class="row">
                 <div class="col-5">
-                    <h5>ORDER#: {{orderno}}</h5>
-                    <span class='font-weight-bold'>John Doe</span> - <span class='text-success'>{{status}}</span> <br>
-                    <span>+63 917 123 4567 - {{buyeremail}}</span> <br>
+                    <h5>ORDER#: {{this.order_no}}</h5>
+                    <span class='font-weight-bold'>John Doe</span> - <span class='text-success'>{{this.status}}</span> <br>
+                    <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
                     <span>123 Main St., Manila City, Metro Manila</span>
                     <br><br>
-                    <span class='font-weight-bold'>DATE ORDERED:</span> {{dateoforder}} <br>
-                    <span class='font-weight-bold'>DATE ESTIMATED:</span> {{dateofdeliver}}
+                    <span class='font-weight-bold'>DATE ORDERED:</span> {{this.date_of_order}} <br>
+                    <span class='font-weight-bold'>DATE ESTIMATED:</span> {{this.date_of_deliver}}
 
                     <div class="dropdown mt-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th>TOTAL</th>
-                                <th>{{totalprice}}</th>
+                                <th id="totalprice">{{this.total_price}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +55,11 @@
 <script>
     $(document).ready( function(){
 
-        var arr = $(".total")
+        var total = $("#totalprice").text();
+        total = total + ".00";
+        $("#totalprice").text(total);
+
+        var arr = $(".total");
         var p;
         var q;
         for(i=0; i<arr.length; i++)
@@ -63,8 +68,6 @@
             q = $(arr[i]).parent().parent().children().children().filter(".quantity").text()
             console.log(p)
             $(arr[i]).text("" + p * q + ".00")
-            
-            
         }
     })
 </script>
