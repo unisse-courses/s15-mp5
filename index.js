@@ -2,9 +2,13 @@ const express = require('express');
 
 const app = express();
 
+require('./startup/database-connection');
 require('./startup/dependencies')(app);
 require('./startup/routes')(app);
-require('./startup/database-connection');
+
+const Order = require('./models').orders;
+const OrderItem = require('./models').order_items;
+
 
 const port = process.env.PORT || 9090;
 var hbs = require('express-handlebars');
@@ -56,7 +60,43 @@ app.get('/checkout', (req,res) => {
     addressLine1: "123 Main St.",
     addressLine2: "Manila City, Metro Manila"
     })
-})
+});
+
+app.post('/checkout', async (req, res) => {
+
+    let ids = [];
+    let total_price = 0;
+    let order_items = req.body.order_items;
+    let buyer = req.body.buyer;
+    let status = "Pending";
+    let date_of_order = new Date();
+
+    for (var i = 0; i < order_items.length; i++) {
+        ids.push(order_items[i]._id);
+        total_price += order_items[i].computed_price
+    }
+
+    // create new order
+    let order = await Order.create({
+        status,
+        buyer,
+        date_of_order,
+        total_price
+    });
+
+    // update order_items with the order created
+    let updateOrderItems = await OrderItem.updateMany(
+        { _id: { $in: ids } },
+        { order_no: order._id, status: 1 }
+    );
+
+    if(updateOrderItems) console.log('order items successfully added to order');
+    else console.log('error in adding order items to order');
+
+    res.send(order);
+
+    
+});
 
 app.get('/profile', (req,res) => {
     res.render('profile', {title: 'Profile',

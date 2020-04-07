@@ -4,11 +4,10 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
     order_no: {
-        type: String,
-        required: true
+        type: String
     },
     status: {
-        type: Number,
+        type: String,
         required: true
     },
     buyer: {
@@ -23,8 +22,7 @@ const schema = new mongoose.Schema({
     },
     date_of_deliver: {
         type: Date,
-        required: true,
-        default: Date.now
+        default: null
     },
     total_price: {
         type: Number,

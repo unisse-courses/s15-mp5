@@ -13,8 +13,7 @@ const schema = new mongoose.Schema({
     },
     order_no: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'orders',
-        required: true
+        ref: 'orders'
     },
     product_no: {
         type: mongoose.Schema.Types.ObjectId,
