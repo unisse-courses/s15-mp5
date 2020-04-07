@@ -19,7 +19,7 @@ router.get('/catalogue', ensureAuthenticated, (req,res) => {
         {
             return res.redirect('/admin/orders')
         }
-        console.log(results);
+        //console.log(results);
         mongoose.model('products').find({}, (err, products) => {
             res.render('catalogue', 
             {

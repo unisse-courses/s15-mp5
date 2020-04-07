@@ -3,9 +3,6 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    order_no: {
-        type: String
-    },
     status: {
         type: String,
         required: true
@@ -28,6 +25,10 @@ const schema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    order_items: {
+        type: Array,
+        required: true
     }
 });
 

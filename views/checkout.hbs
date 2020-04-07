@@ -48,6 +48,19 @@ $(document).ready(function(){
         }
         
     });
+
+    $("#confirmDelivery").click(function () {
+        $.ajax({
+            url: "/checkout",
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) 
+            { 
+                console.log('POST success!'); 
+                window.location.href = "/catalogue"; 
+            },
+        });
+    })
 });
 </script>
 
@@ -141,6 +154,6 @@ $(document).ready(function(){
             <li>Please check your account information if they are up to date and correct. Wrong information will cause delays to your delivery.</li>
         </ol>
         </p>
-        <button class='btn btn-success border-0' onclick="location.href='/catalogue'">Proceed with Delivery</button>
+        <button class='btn btn-success border-0' id='confirmDelivery'>Proceed with Delivery</button>
     </div>
 </div>

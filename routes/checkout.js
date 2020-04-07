@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
+const mongoose = require('mongoose');
 
 const ObjectID = require('mongodb').ObjectID;
 const Acct = require('../models/accounts');
 const Order = require('../models/orders');
-const OrderItem = require('../models/order_items');
 
 var shoppingCartItems = null;
+
+class orderItem {
+    constructor(productno, quantity, computedPrice) {
+        this.productno = productno;
+        this.quantity = quantity;
+        this.computedPrice = computedPrice;
+    }
+}
 
 router.post('/passCheckout', (req,res,next) => {
     shoppingCartItems = req.body;
@@ -45,36 +53,36 @@ router.get('/checkout', ensureAuthenticated, (req,res) => {
 
 router.post('/checkout', async (req, res) => {
 
-    let ids = [];
-    let total_price = 0;
-    let order_items = req.body.order_items;
-    let buyer = req.body.buyer;
-    let status = "Pending";
-    let date_of_order = new Date();
+    const _id = ObjectID(req.session.passport.user);
 
-    for (var i = 0; i < order_items.length; i++) {
-        ids.push(order_items[i]._id);
-        total_price += order_items[i].computed_price
-    }
+    Acct.findOne({ _id }, (err, results) => {
+        let total_price = 50;
+        let order_items = [];
+        let buyer = results.email;
+        let status = "Active";
 
-    // create new order
-    let order = await Order.create({
-        status,
-        buyer,
-        date_of_order,
-        total_price
-    });
+        for (item of shoppingCartItems) {
+            total_price += item.itemPrice;
+            let orderitem = new orderItem(item.productno, item.quantity, item.itemPrice);
+            order_items.push(orderitem);
+        }
 
-    // update order_items with the order created
-    let updateOrderItems = await OrderItem.updateMany(
-        { _id: { $in: ids } },
-        { order_no: order._id, status: 1 }
-    );
+        // create new order
+        let order = new Order({
+            status,
+            buyer,
+            total_price,
+            order_items
+        });
 
-    if(updateOrderItems) console.log('order items successfully added to order');
-    else console.log('error in adding order items to order');
+        if(order) console.log('order items successfully added to order');
+        else console.log('error in adding order items to order');
 
-    res.send(order);
+        console.log(order)
+        order.save();
+
+        res.send(order);
+    })
 
 });
 
