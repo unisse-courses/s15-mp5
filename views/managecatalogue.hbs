@@ -7,79 +7,82 @@
         <button class='btn btn-success'>Add Item</button>
     </div>
     <br>
-        <form method="POST" action="/admin/products">
-        <div id="template" class='row mt-2 mb-4'>
-            <div class='row media border container rounded'>
-                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                    <img class="rounded mr-2 itemPicture" src="" alt="Generic placeholder image">
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                    <div class="row">
-                        <input class="d-none" type="text" name="id" value=''>
-                        <div class="col-lg-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Item Name</span>
-                                </div>
-                                <input name="name" type="text" class="form-control" value='' aria-label="" aria-describedby="basic-addon1" required>
-                            </div>          
-                        </div>
-                        <div class="col-lg-4 mt-xs-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Price</span>
-                                </div>
-                                <input name="price" type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1" required>
-                            </div>          
-                        </div>
+        <form method="POST" action="/admin/products" enctype="multipart/form-data">
+            <div id="template" class='row mt-2 mb-4'>
+                <div class='row media border container rounded'>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                        <img class="rounded mr-2 itemPicture" src="itempictures/default.png" alt="Generic placeholder image">
                     </div>
-                    <div class="row mt-2">
-                        <button type="button" class='editicon btn btn-light border mx-2'>Edit Icon</button>
-                        <button type="button" class='cancel-temp btn btn-danger border mx-2'>Cancel</button>
-                        <button type="submit" class='confirm-temp btn btn-success border mx-2'>Confirm</button>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                        <div class="row">
+                            <input class="d-none" type="text" name="id" value=''>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Item Name</span>
+                                    </div>
+                                    <input name="name" type="text" class="form-control" value='' aria-label="" aria-describedby="basic-addon1" required>
+                                </div>          
+                            </div>
+                            <div class="col-lg-4 mt-xs-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Price</span>
+                                    </div>
+                                    <input name="price" type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1" required>
+                                </div>          
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='fileupload-temp btn btn-light border mx-3'>
+                            <button type="button" class='cancel-temp btn btn-danger border mx-3'>Cancel</button>
+                            <button class='confirm-temp btn btn-success border mx-3'>Confirm</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </form>
+
         {{#each products}}
-        <form method="POST" action="/admin/products"> 
-        <div class='row mt-2 mb-4'>
-            <div class='row media border container rounded'>
-                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                    <img class="rounded mr-2 itemPicture" src="{{this.picture}}" alt="Generic placeholder image">
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
-                    <div class="row">
-                        <input class="d-none" type="text" name="id" value='{{this._id}}' >
-                        <div class="col-lg-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Item Name</span>
-                                </div>
-                                <input name="name" type="text" class="form-control" value='{{this.name}}' aria-label="" aria-describedby="basic-addon1" readonly required> 
-                            </div>          
-                        </div>
-                        <div class="col-lg-4 mt-xs-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Price</span>
-                                </div>
-                                <input name="price" type="number" class="form-control font-weight-bold price" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
-                            </div>          
-                        </div>
+        <form  method="POST" action="/admin/products" enctype="multipart/form-data"> 
+            <div class='row mt-2 mb-4'>
+                <div class='row media border container rounded'>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
+                        <img class="rounded mr-2 itemPicture" src="itempictures/{{this.picture}}" alt="Generic placeholder image">
                     </div>
-                    <div class="row mt-2">
-                        <button type="button" class='edit btn btn-light border mx-2'>Edit</button>
-                        <button type="button" class='editicon btn btn-light border mx-2'>Edit Icon</button>
-                        <button type="submit" formaction="/admin/deleteProduct" class='delete btn btn-danger mx-2'>Delete Item</button>
-                        <button type="button" class='cancel btn btn-light border mx-2'>Cancel</button>
-                        <button class='confirm btn btn-success border mx-2'>Confirm</button>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
+                        <div class="row">
+                            <input class="d-none" type="text" name="id" value='{{this._id}}' >
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Item Name</span>
+                                    </div>
+                                    <input name="name" type="text" class="form-control" value='{{this.name}}' aria-label="" aria-describedby="basic-addon1" readonly required> 
+                                </div>          
+                            </div>
+                            <div class="col-lg-4 mt-xs-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Price</span>
+                                    </div>
+                                    <input name="price" type="number" class="form-control font-weight-bold price" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
+                                </div>          
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <button type="button" class='edit btn btn-light border mx-3'>Edit</button>
+                            <button type="button" class='editicon btn btn-light border mx-3'>Edit Icon</button>
+                            <button type="submit" formaction="/admin/deleteProduct" class='delete btn btn-danger mx-3'>Delete Item</button>
+                            <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='fileupload btn btn-light border mx-3'>
+                            <button type="button" class='cancel btn btn-light border mx-3'>Cancel</button>
+                            <button class='confirm btn btn-success border mx-3'>Confirm</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </form>
+
         {{/each}}
 
     </div>
@@ -96,6 +99,7 @@
         $(".cancel").hide();
         $(".confirm").hide();
         $(".editicon").hide();
+        $(".fileupload").hide();
 
 
         $("body").on("click", ".edit", function(){
@@ -129,6 +133,7 @@
             $(this).parent().children().filter(".delete").show();
             $(this).parent().children().filter(".confirm").hide();
             $(this).parent().children().filter(".editicon").hide();
+            $(this).parent().children().filter(".fileupload").hide();
         });
 
         $("body").on("click", ".cancel-temp", function(){
@@ -140,11 +145,13 @@
         });
 
         $("body").on("click", ".confirm", function(){
-             targetInputs = $(this).parent().parent().find("input");
+            targetInputs = $(this).parent().parent().find("input");
+
             for(i=0; i<targetInputs.length; i++)
             {
                 targetInputs[i].setAttribute("readonly", true);
             }
+
             $(".cancel").hide();
             $(".edit").show();
             $(".delete").show();
@@ -155,13 +162,19 @@
             $(this).parent().children().filter(".delete").show();
             $(this).parent().children().filter(".confirm").hide();
             $(this).parent().children().filter(".editicon").hide();
+            $(this).parent().children().filter(".fileupload").hide();
         });
 
         $("#btnAdd").click( function(){
             clone = $("#template").toggle();
         });
-   
 
+        $(".editicon").click(function ()
+            {
+                $(this).hide();
+                $(this).siblings().filter(".fileupload").show();
+            }
+        );
     });
 
 </script>

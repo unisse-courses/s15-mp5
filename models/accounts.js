@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+    profilepic: {
+        type: String,
+        required: true,
+        default: "defaultdp.png"
+    },
     email: {
         type: String,
         required: true

@@ -13,7 +13,7 @@
                     <div class='item card border-0 my-3' data-value="{{_id}}">
                         <div class="card-body">
                             <div class="itemPictureHolder rounded text-center">
-                                    <img src='{{picture}}' class='itemPicture'>
+                                    <img src='itempictures/{{picture}}' class='itemPicture'>
                             </div>
                             <div class='row itemFooter ml-2'>
                                 <div class='col itemDescription mt-1'>
@@ -83,17 +83,21 @@
                         Past Orders
                     </div>
                     <!-- Change to a clickable: Redirect to checkout page with items of this order -->
+
+                    {{#each orders}}
                     <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
                         <div class='col-7 text-left'>
                             <div class='row'>
-                                February 3, 2020
+                                {{date_of_order}}
                             </div>
                             <!-- Change to first item of the order-->
                             <div class='row itemPrice'>
-                                PHP 1700.00
+                                {{total_price}}
                             </div>
                         </div>
                     </div>
+                    {{/each}}
+
                 </div>
             </div>
         </div>

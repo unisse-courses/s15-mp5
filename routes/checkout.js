@@ -42,6 +42,7 @@ router.get('/checkout', ensureAuthenticated, (req,res) => {
             order: shoppingCartItems,
             totalPrice: total.toFixed(2),
             fname: results.fname,
+            profilepic: req.user.profilepic,
             lname: results.lname,
             email: results.email,
             contactNumber: results.number,

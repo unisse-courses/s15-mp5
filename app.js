@@ -7,6 +7,7 @@ const session = require('express-session');
 const hbs = require('handlebars');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const app = express();
 require('./config/passport')(passport);
@@ -25,6 +26,7 @@ const URL = "mongodb+srv://LouisD69:baloney1@pharmago-5nuy4.gcp.mongodb.net/test
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
+
 
 // Handlebars
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');

@@ -19,15 +19,22 @@ router.get('/catalogue', ensureAuthenticated, (req,res) => {
         {
             return res.redirect('/admin/orders')
         }
+
         //console.log(results);
-        mongoose.model('products').find({}, (err, products) => {
-            res.render('catalogue', 
-            {
-                title: 'Pharmago',
-                fname: results.fname,
-                catalogue: products
-            })
-        });
+
+        mongoose.model('orders').find({buyer: req.user.email}, (err, orderList) =>
+        {
+            mongoose.model('products').find({}, (err, products) => {
+                res.render('catalogue', 
+                {
+                    title: 'Pharmago',
+                    fname: results.fname,
+                    profilepic: req.user.profilepic,
+                    catalogue: products,
+                    orders: orderList
+                })
+            });
+        })
     })
 })
 

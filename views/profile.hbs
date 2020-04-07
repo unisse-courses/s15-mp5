@@ -1,3 +1,83 @@
+<div class="container">
+        <div class="row mt-4">
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid" id="accountcont">
+                    <h2>Personal Information</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <form action="/profile" method="POST">
+                            <div id="acctformcont" class="container">
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input name="fname" class="form-control" type="text" id="name" value='{{fname}}' placeholder="Full Name" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input name="lname"class="form-control" type="text" id="name" value='{{lname}}' placeholder="Full Name" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input name="email" class="form-control" type="email" id="email" value='{{email}}' placeholder="Email" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="number">Contact Number</label>
+                                    <input name="number" class="form-control" type="text" id="number" value='{{number}}' pattern="^(09)\d{9}$"
+                                        placeholder="Contact Number" readonly>
+                                    <span id="error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="add1">Address Line 1</label>
+                                    <input name="add1" class="form-control" type="text" id="add1" value='{{add1}}' placeholder="Unit / Block no., Street no., Subd.," readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="add2">Address Line 2</label>
+                                    <input name="add2" class="form-control" type="text" id="add2" value='{{add2}}'placeholder="Brgy., Municipality, City / Province, Region" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input name="city" class="form-control" type="text" id="city" value='{{city}}'placeholder="City" readonly>
+                                </div>
+                                <div class="container row">
+                                    <button id="btnEdit" type="button" class="col-3 offset-4 btn btn-secondary">Edit</button>
+                                    <button id="btnCancel" type="button"  class="col-3 offset-4 btn btn-danger">Cancel</button>
+                                    <button id="btnConfirm" type="submit" class="col-3 offset-2 btn btn-success">Confirm</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid">
+                    <h2>Profile Picture</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <img src='profilepictures/{{profilepic}}' width='200px'>
+                        <form action="/profilepicture" method="POST" enctype="multipart/form-data">
+                            <input type="file" name='profilePic' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='mt-5'>
+                            <button class='btn btn-success border mt-3'>Change Picture</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h2>Password</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <form action="/changepassword" method="POST">
+                            <div class="form-group">
+                                <label for="ps1">New Password</label>
+                                <input name="ps1" class="form-control" type="text" class="ps1">
+                            </div>
+                            <div class="form-group">
+                                <label for="ps2">New Password Confirm</label>
+                                <input name="ps2"class="form-control" type="text" class="ps2">
+                            </div>
+                            <button class='btn btn-success border mt-3'>Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function(){
     var num;
@@ -58,56 +138,4 @@ $(document).ready(function(){
     });
 });
 </script>
-
-<div class="container">
-        <div class="row mt-4">
-            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
-                <div class="container-fluid" id="accountcont">
-                    <h2>Personal Information</h2>
-                    <div class="jumbotron bg-grey" id="accountbox">
-                        <form action="/profile" method="POST">
-                            <div id="acctformcont" class="container">
-                                <div class="form-group">
-                                    <label for="fname">First Name</label>
-                                    <input name="fname" class="form-control" type="text" id="name" value='{{fname}}' placeholder="Full Name" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lname">Last Name</label>
-                                    <input name="lname"class="form-control" type="text" id="name" value='{{lname}}' placeholder="Full Name" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input name="email" class="form-control" type="email" id="email" value='{{email}}' placeholder="Email" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="number">Contact Number</label>
-                                    <input name="number" class="form-control" type="text" id="number" value='{{number}}' pattern="^(09)\d{9}$"
-                                        placeholder="Contact Number" readonly>
-                                    <span id="error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="add1">Address Line 1</label>
-                                    <input name="add1" class="form-control" type="text" id="add1" value='{{add1}}' placeholder="Unit / Block no., Street no., Subd.," readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="add2">Address Line 2</label>
-                                    <input name="add2" class="form-control" type="text" id="add2" value='{{add2}}'placeholder="Brgy., Municipality, City / Province, Region" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input name="city" class="form-control" type="text" id="city" value='{{city}}'placeholder="City" readonly>
-                                </div>
-                                <div class="container row">
-                                    <button id="btnEdit" type="button" class="col-3 offset-4 btn btn-secondary">Edit</button>
-                                    <button id="btnCancel" type="button"  class="col-3 offset-4 btn btn-danger">Cancel</button>
-                                    <button id="btnConfirm" type="submit" class="col-3 offset-2 btn btn-success">Confirm</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 

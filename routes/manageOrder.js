@@ -22,6 +22,7 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
 
       res.render('manageOrder', {title: 'Admin - Orders',
         fname: results.fname,
+        profilepic: req.user.profilepic,
         orders: result,
         });
     });
