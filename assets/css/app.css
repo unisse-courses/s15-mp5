@@ -31,7 +31,7 @@
     height: 150px;
 }
 
-.itemPrice {
+.itemPrice, .totalPrice {
     color: #232423;
     font-weight: bold;
 }

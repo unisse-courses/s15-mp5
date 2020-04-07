@@ -65,13 +65,13 @@ $(document).ready(function(){
                             <div class="media-body my-auto d-flex">
                                 <div class='col-7 text-left'>
                                     <div class='row'>
-                                        {{itemName}}
+                                        {{name}}
                                     </div>
                                     <div class='row itemPrice'>
-                                        {{itemPrice}} X {{quantity}}
+                                        {{price}} X {{quantity}}
                                     </div>
                                 </div>
-                                <div class='col-5 float-right text-right'>COMPUTE</div>
+                                <div class='col-5 float-right text-right'>{{itemPrice}}</div>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ $(document).ready(function(){
                             <h5>TOTAL</h5>
                         </div>
                         <h6>PHP</h6>
-                        <h6>COMPUTE</h6>
+                        <h6>{{totalPrice}}</h6>
                     </div>
                 </div>
             </div>
