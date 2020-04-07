@@ -19,7 +19,5 @@ Instructions:
 
 Notice: 
 - Input Validation (Client-Side) for Register is incomplete
-- Catalogue Page is incomplete
 - Order Page is incomplete
-- Image inputs are also missing
 
