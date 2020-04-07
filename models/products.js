@@ -3,13 +3,10 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    product_no: {
-        type: String,
-        required: true
-    },
+
     picture: {
         type: String,
-        required: true
+        //required: true
     },
     name: {
         type: String,
@@ -20,6 +17,7 @@ const schema = new mongoose.Schema({
         required: true
     }
 });
+
 
 const Model = mongoose.model('products', schema);
 

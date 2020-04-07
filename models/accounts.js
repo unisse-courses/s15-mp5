@@ -1,35 +1,33 @@
-'use strict';
-
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    email_address: {
+    email: {
         type: String,
         required: true
     },
-    password: {
+    pw1: {
         type: String,
         required: true
     },
-    first_name: {
+    fname: {
         type: String,
         required: true
     },
-    last_name: {
+    lname: {
         type: String,
         required: true
     },
-    profile_picture: {
+    picture: {
         type: String
     },
-    contact_number: {
+    number: {
         type: String
     },
-    address_line_1: {
+    add1: {
         type: String,
         required: true
     },
-    address_line_2: {
+    add2: {
         type: String
     },
     city: {
@@ -38,7 +36,8 @@ const schema = new mongoose.Schema({
     },
     ifAdmin: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     }
 });
 

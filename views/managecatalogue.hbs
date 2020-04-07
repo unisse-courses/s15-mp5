@@ -7,20 +7,21 @@
         <button class='btn btn-success'>Add Item</button>
     </div>
     <br>
-        <!-- TEMPLATE START -->
+        <form method="POST" action="/admin/products">
         <div id="template" class='row mt-2 mb-4'>
             <div class='row media border container rounded'>
                 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                    <img class="rounded mr-2 itemPicture" src="default.png" alt="Generic placeholder image">
+                    <img class="rounded mr-2 itemPicture" src="" alt="Generic placeholder image">
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
                     <div class="row">
+                        <input class="d-none" type="text" name="id" value=''>
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Item Name</span>
                                 </div>
-                                <input type="text" class="form-control" value='' aria-label="" aria-describedby="basic-addon1">
+                                <input name="name" type="text" class="form-control" value='' aria-label="" aria-describedby="basic-addon1" required>
                             </div>          
                         </div>
                         <div class="col-lg-4 mt-xs-2">
@@ -28,36 +29,35 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Price</span>
                                 </div>
-                                <input type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1">
+                                <input name="price" type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1" required>
                             </div>          
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <button  class='edit btn btn-light border mx-2'>Edit</button>
-                        <button class='editicon btn btn-light border mx-2'>Edit Icon</button>
-                        <button class='delete btn btn-danger mx-2'>Delete Item</button>
-                        <button class='cancel btn btn-light border mx-2'>Cancel</button>
-                        <button class='confirm btn btn-success border mx-2'>Confirm</button>
+                        <button type="button" class='editicon btn btn-light border mx-2'>Edit Icon</button>
+                        <button type="button" class='cancel-temp btn btn-danger border mx-2'>Cancel</button>
+                        <button type="submit" class='confirm-temp btn btn-success border mx-2'>Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- TEMPLATE END -->
-
+        </form>
         {{#each products}}
+        <form method="POST" action="/admin/products"> 
         <div class='row mt-2 mb-4'>
             <div class='row media border container rounded'>
                 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 text-center">
-                    <img class="rounded mr-2 itemPicture" src="{{picture}}" alt="Generic placeholder image">
+                    <img class="rounded mr-2 itemPicture" src="{{this.picture}}" alt="Generic placeholder image">
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 media-body my-auto px-3">
                     <div class="row">
+                        <input class="d-none" type="text" name="id" value='{{this._id}}' >
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Item Name</span>
                                 </div>
-                                <input type="text" class="form-control" value='{{name}}' aria-label="" aria-describedby="basic-addon1" readonly>
+                                <input name="name" type="text" class="form-control" value='{{this.name}}' aria-label="" aria-describedby="basic-addon1" readonly required> 
                             </div>          
                         </div>
                         <div class="col-lg-4 mt-xs-2">
@@ -65,20 +65,21 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Price</span>
                                 </div>
-                                <input type="number" class="form-control font-weight-bold" value='{{price}}' aria-label="" aria-describedby="basic-addon1" readonly>
+                                <input name="price" type="number" class="form-control font-weight-bold price" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
                             </div>          
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <button  class='edit btn btn-light border mx-2'>Edit</button>
-                        <button class='editicon btn btn-light border mx-2'>Edit Icon</button>
-                        <button class='delete btn btn-danger mx-2'>Delete Item</button>
-                        <button class='cancel btn btn-light border mx-2'>Cancel</button>
+                        <button type="button" class='edit btn btn-light border mx-2'>Edit</button>
+                        <button type="button" class='editicon btn btn-light border mx-2'>Edit Icon</button>
+                        <button type="submit" formaction="/admin/deleteProduct" class='delete btn btn-danger mx-2'>Delete Item</button>
+                        <button type="button" class='cancel btn btn-light border mx-2'>Cancel</button>
                         <button class='confirm btn btn-success border mx-2'>Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
         {{/each}}
 
     </div>
@@ -90,10 +91,12 @@
         var name;
         var price;
         var targetInputs;
+        var priceList
         $("#template").hide();
         $(".cancel").hide();
         $(".confirm").hide();
         $(".editicon").hide();
+
 
         $("body").on("click", ".edit", function(){
             
@@ -128,8 +131,12 @@
             $(this).parent().children().filter(".editicon").hide();
         });
 
+        $("body").on("click", ".cancel-temp", function(){
+            targetDiv = $(this).parent().parent().parent().parent().hide();;
+        });
+
         $("body").on("click", ".delete", function(){
-            targetDiv = $(this).parent().parent().parent().parent().remove();
+            targetDiv = $(this).parent().parent().parent().parent().hide();
         });
 
         $("body").on("click", ".confirm", function(){
@@ -151,8 +158,7 @@
         });
 
         $("#btnAdd").click( function(){
-            clone = $("#template").clone().show();
-            $(this).parent().append(clone);
+            clone = $("#template").toggle();
         });
    
 

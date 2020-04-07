@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     buyer: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'accounts',
         required: true
     },

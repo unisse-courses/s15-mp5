@@ -8,6 +8,12 @@
     <div class="navbar-collapse collapse" id="navbar" data-toggle='collapse'>
         <ul class="navbar-nav mr-auto ml-3">
             <li class="nav-item active">
+                <a class="nav-link" href="/admin/orders">Orders<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/products">Catalogue<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
@@ -18,17 +24,27 @@
 </nav>
 <div class="mx-auto container">
     <div class='row d-none d-md-flex mb-4'>
-        <div class='col-7 col-md-8 col-lg-9'>
+        <div class='col-md-3 col-lg-5'>
             <img src='pharmago-logo.png' height='30px' onclick="location.href='/catalogue'">
         </div>
-        <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
-                <button onclick="location.href='/logout'" type="button" class='col-4 mr-5 text-center btn btn-outline-dark rounded float-left'>
+        <div class='col-md-9 col-lg-7 d-flex align-items-center'>
+            <div class='col-9'>
+                <button onclick="location.href='/admin/orders'" type="button" class='mr-2 col-3 text-center btn btn-outline-dark rounded float-left'>
+                    Orders
+                </button>
+                <button onclick="location.href='/admin/products'" type="button" class='mr-2 col-3 text-center btn btn-outline-dark rounded float-left'>
+                    Catalogue
+                </button>
+                <button onclick="location.href='/logout'" type="button" class='col-3 text-center btn btn-outline-dark rounded float-left'>
                     Logout
                 </button>
-                <button onclick="location.href='/profile'" type="button" class='col-7 btn p-0'>
+            </div>
+            <div class='col-3 float-right px-0'>
+                <button onclick="location.href='/profile'" type="button" class='col-6 btn p-0'>
                     <span class='float-left'>{{fname}}</span>
                     <img class='rounded-circle float-right' src='boy-profile.png' height='30px'>
                 </button>
             </div>
+        </div>
     </div>
 </div>
