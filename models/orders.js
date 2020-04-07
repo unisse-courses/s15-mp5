@@ -23,8 +23,7 @@ const schema = new mongoose.Schema({
     },
     date_of_deliver: {
         type: Date,
-        required: true,
-        default: Date.now
+        default: null
     },
     total_price: {
         type: Number,

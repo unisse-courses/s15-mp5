@@ -5,7 +5,8 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 const hbs = require('handlebars');
-const exphbs = require('express-handlebars')
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 const app = express();
 require('./config/passport')(passport);
@@ -40,6 +41,7 @@ app.set('view engine', 'hbs')
 
 // Body Parser
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Session
 app.use(
@@ -64,6 +66,7 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/register'));
 app.use('/', require('./routes/catalogue'));
 app.use('/', require('./routes/profile'));
+app.use('/', require('./routes/checkout'));
 app.use('/admin', require('./routes/manageOrder'));
 app.use('/admin', require('./routes/catalogue'));
 app.use('/admin', require('./routes/manageCatalogue'));

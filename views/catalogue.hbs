@@ -1,31 +1,34 @@
 <div class='mx-auto container'>
     <div class='row'>
         <div class='col-12 col-lg-9'>
-            <div class='d-none d-md-block jumbrotron rounded bg-lightblue'>
-                <img class='d-flex mx-auto py-5' src='pharmago-logo.png'>
+            <div class='d-none d-md-block jumbrotron rounded bg-lightblue py-5'>
+                Ad Space
             </div>
-            <div class="row my-3 d-flex"> 
+
+            <div class="row my-3 d-flex">
+
                 {{#each catalogue}}
+                
                 <div class="col-8 offset-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3">
-                    <div class='item card border-0 my-3' value='0'>
+                    <div class='item card border-0 my-3' data-value="{{_id}}">
                         <div class="card-body">
                             <div class="itemPictureHolder rounded text-center">
-                                    <img src='{{itemPicture}}' class='itemPicture'>
+                                    <img src='{{picture}}' class='itemPicture'>
                             </div>
                             <div class='row itemFooter ml-2'>
                                 <div class='col itemDescription mt-1'>
-                                    <div class='row'>{{itemName}}</div>
-                                    <div class='row itemPrice'>PHP {{itemPrice}}</div>
+                                    <div class='row itemName'>{{name}}</div>
+                                    <div class='row itemPrice' data-value="{{price}}">PHP {{price}}</div>
                                 </div>
                                 <div class='col addToCart mt-1'>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn bg-blue">-</button>
+                                            <button class="btn bg-blue subtract">-</button>
                                         </div>
-                                        <input type="text" class="form-control" value="0" aria-label=""
+                                        <input type="text" class="form-control quantity-field" value="0" aria-label=""
                                             aria-describedby="basic-addon1" size='2'>
                                         <div class="input-group-append">
-                                            <button class="btn bg-blue">+</button>
+                                            <button class="btn bg-blue add">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -44,6 +47,8 @@
                     <div class='card-title'>
                         Shopping Cart
                     </div>
+
+                    <div id='shoppingCartItems'></div>
                     <!-- TEMPLATE FOR SHOPPING CART ITEMS
 
                     <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
@@ -67,10 +72,10 @@
                             </div>
                         </div>
                         <!-- Dynamic content: Compute total from item prices * quantity -->
-                        <div class='col-7 float-right text-right itemPrice'>0.00</div>
+                        <div class='col-7 float-right text-right totalPrice'>0.00</div>
                     </div>
                 </div>
-                <button class='btn btn-primary bg-lightblue card-footer border-0' onclick="location.href='/checkout'">Checkout</button>
+                <button class='btn btn-primary bg-lightblue card-footer border-0' id="checkoutButton">Checkout</button>
             </div>
             <div class='card bg-grey border-0 rounded mt-4'>
                 <div class='card-body'>
@@ -98,14 +103,160 @@
 <script type='text/javascript'>
 
     $(document).ready(() => {
-        $(".item").hover(function () {
-            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "none");
-            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "block");
-        }, function () {
-            $(this).children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "block");
-            $(this).children('.card-body').children('.itemFooter').children(".addToCart").css("display", "none");
-        })
-    });
+        var prevItem = null;
+        class cartItem {
+            constructor(productno, name, price, quantity, itemPrice) {
+                this.productno = productno;
+                this.name = name;
+                this.price = price;
+                this.quantity = quantity;
+                this.itemPrice = itemPrice;
+            }
+        }
+        var shoppingCartItems = [];
 
+        $(".itemPicture").click(function () {
+            currItem = $(this).parent().parent().parent();
+            currItem.children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "none");
+            currItem.children('.card-body').children('.itemFooter').children(".addToCart").css("display", "block");
+
+            if(prevItem != null)
+            {
+                prevItem.children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "block");
+                prevItem.children('.card-body').children('.itemFooter').children(".addToCart").css("display", "none");
+            }
+
+            if (prevItem != null && prevItem.data('value') == currItem.data('value'))
+            {
+                prevItem = null;
+            } else
+            {
+                prevItem = currItem;
+            }
+        });
+
+        function changeShoppingCart(productno, name, price, newQuantity, itemPrice)
+        {
+            var item = shoppingCartItems.find(item => productno == item.productno);
+            if (item != null && newQuantity != 0)
+            {
+                // If its part of the shopping cart, update cart
+                item.quantity = newQuantity;
+                item.itemPrice = itemPrice;
+            }
+            else if (item != null && newQuantity == 0)
+            {
+                // If its part of the shopping cart but new quantity is 0, delete from cart
+                shoppingCartItems.splice(shoppingCartItems.findIndex(item => productno == item.productno))
+            }
+            else
+            {
+                // Item doesn't exist, push to cart
+                var newItem = new cartItem(productno, name, price, newQuantity, itemPrice);
+                shoppingCartItems.push(newItem);
+            }
+
+            $('#shoppingCartItems').empty();
+
+            var cartTotalPrice = 0;
+
+            for(x of shoppingCartItems)
+            {
+                var htmlstring = 
+                `
+                <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
+                    <div class='col-7 text-left'>
+                        <div class='row'>
+                            ${x.name}
+                        </div>
+                        <div class='row'>
+                            ${x.price} X ${x.quantity}
+                        </div>
+                    </div>
+                    <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>${x.itemPrice.toFixed(2)}</div>
+                </div>
+                `;
+
+                $('#shoppingCartItems').append(htmlstring);
+                cartTotalPrice += x.itemPrice;
+            }
+
+            $('.totalPrice').html(cartTotalPrice.toFixed(2));
+            
+        }
+
+        $(".add").click(function ()
+        {
+            var val = parseInt($(this).parent().siblings("input").val());
+            var productno = $(this).parents().filter(".item").data('value');
+            var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
+            var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+            val++;
+            var itemPrice = price*val;
+
+            changeShoppingCart(productno, name, price, val, itemPrice);
+
+            $(this).parent().siblings("input").val(val);
+            console.log(productno, shoppingCartItems)
+        });
+
+        $(".subtract").click(function ()
+        {
+            var val = parseInt($(this).parent().siblings("input").val());
+            if(val > 0)
+            {
+                var productno = $(this).parents().filter(".item").data('value');
+                var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
+                var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+                val--;
+                var itemPrice = price*val;
+
+                changeShoppingCart(productno, name, price, val, itemPrice);
+
+                $(this).parent().siblings("input").val(val);
+                console.log(productno, shoppingCartItems);
+            }
+        });
+
+        $(".quantity-field").change(function ()
+        {
+            var val = parseInt($(this).val());
+            if(val > 0)
+            {
+                var productno = $(this).parents().filter(".item").data('value');
+                var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
+                var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+                var itemPrice = price*val;
+
+                changeShoppingCart(productno, name, price, val, itemPrice);
+
+                $(this).val(val);
+                console.log(productno, shoppingCartItems)
+            } 
+            else
+            {
+                $(this).val("0");
+                console.log(productno, shoppingCartItems);
+            }
+        });
+
+        $("#checkoutButton").click(function() 
+        {
+            if(shoppingCartItems.length != 0)
+            {    
+                $.ajax({
+                    url: "/passCheckout",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(shoppingCartItems),
+                    success: function (data) 
+                    { 
+                        console.log('POST success!'); 
+                        window.location.href = "/checkout"; 
+                    },
+                });
+            }
+        });
+    });
     
 </script>
