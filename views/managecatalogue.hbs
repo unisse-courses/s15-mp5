@@ -29,7 +29,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Price</span>
                                     </div>
-                                    <input name="price" type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1" required>
+                                    <input name="price" type="number" class="form-control font-weight-bold decimal" value='' aria-label="" aria-describedby="basic-addon1" required>
                                 </div>          
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Price</span>
                                     </div>
-                                    <input name="price" type="number" class="form-control font-weight-bold price" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
+                                    <input name="price" type="number" class="form-control font-weight-bold price decimal" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
                                 </div>          
                             </div>
                         </div>
@@ -175,6 +175,16 @@
                 $(this).siblings().filter(".fileupload").show();
             }
         );
+
+        var decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).val();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            $(decimal[i]).val(newValue);
+        }
     });
 
 </script>
