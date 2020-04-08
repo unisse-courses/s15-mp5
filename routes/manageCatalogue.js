@@ -24,7 +24,7 @@ const imgfilter = function (req, file, cb)
     else cb (null, false);
 }
 
-const itemupload = multer({storage: itemstrategy, fileFilter: imgfilter});
+const itemupload = multer({storage: itemstrategy, fileFilter: imgfilter}).single('itemImg');
 
 router.get('/products', ensureAuthenticated, (req, res, next) => {
 
@@ -44,39 +44,57 @@ router.get('/products', ensureAuthenticated, (req, res, next) => {
 })
 
 
-router.post('/products', itemupload.single('itemImg'), (req, res, next) => {
+router.post('/products', (req, res, next) => {
 
-    var id = req.body.id;
-    var name = req.body.name;
-    var price = parseFloat(req.body.price);
-    var picture = req.file.filename;
-    //console.log(req.file);
+    itemupload(req, res, () => {
+        console.log(req.body);
+        console.log(req.file);
 
-    // Create 
-    if(id == "")
-    {
-        const newProduct = new Prod({picture, name, price});
-        newProduct.save()
-        .then( x => {
-            // res.sendStatus(204)
-            res.redirect('/admin/products')
-        })
-    }
-    else // Update
-    {
-        const _id = ObjectId(id);
+        var id = req.body.id;
+        var name = req.body.name;
+        var price = parseFloat(req.body.price);
+        if(req.file != undefined) var picture = req.file.filename;
 
-        Prod.updateOne({ "_id" : _id }, 
-        { "$set" : 
-            {   "name" : name, 
-                "price" : price,
-                "picture": picture
-            }
-        })
-        .then( x => {
-            res.sendStatus(204)
-        })
-    }
+        // Create 
+        if(id == "")
+        {
+            const newProduct = new Prod({picture, name, price});
+            newProduct.save()
+            .then( x => {
+                // res.sendStatus(204)
+                res.redirect('/admin/products')
+            })
+        }
+        else if (req.file != undefined) // Update with Picture Change
+        {
+            const _id = ObjectId(id);
+
+            Prod.updateOne({ "_id" : _id }, 
+            { "$set" : 
+                {   "name" : name, 
+                    "price" : price,
+                    "picture": picture
+                }
+            })
+            .then( x => {
+                res.redirect('/admin/products')
+            })
+        }
+        else // Update with no picture change
+        {
+            const _id = ObjectId(id);
+
+            Prod.updateOne({ "_id" : _id }, 
+            { "$set" : 
+                {   "name" : name, 
+                    "price" : price,
+                }
+            })
+            .then( x => {
+                res.sendStatus(204)
+            })
+        }
+    })
     
 });
 
