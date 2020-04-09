@@ -29,14 +29,14 @@
                         <thead>
                             <tr>
                                 <th>TOTAL</th>
-                                <th id="totalprice">{{this.total_price}}</th>
+                                <th class="decimal">{{this.total_price}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#each this.order_items}}
                             <tr>
-                                <td>{{name}} (PHP <span class="price">{{price}}</span> X <span class="quantity">{{quantity}}</span>)</td>
-                                <td><span class="total">{{computedPrice}}</span></td>
+                                <td>{{name}} (PHP <span class="price decimal">{{price}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
+                                <td><span class="total decimal"></span></td>
                             </tr>
                             {{/each}}
                             <tr>
@@ -55,9 +55,7 @@
 <script>
     $(document).ready( function(){
 
-        var total = $("#totalprice").text();
-        total = total + ".00";
-        $("#totalprice").text(total);
+        // breakdown of total: price x quantity
 
         var arr = $(".total");
         var p;
@@ -68,25 +66,20 @@
             p = $(arr[i]).parent().parent().children().children().filter(".price").text()
             q = $(arr[i]).parent().parent().children().children().filter(".quantity").text()
             //console.log(p)
-            $(arr[i]).text("" + p * q + ".00")
+            $(arr[i]).text("" + p * q)
         }
 
-        $('.changestatus').click(function (){
-            newStatus = $(this).data('value');
-            orderNo = $(this).parent().siblings().filter('.orderno').data('value');
-            console.log(newStatus, orderNo);
 
-            $.ajax({
-                    url: "/admin/changeStatus",
-                    type: 'POST',
-                    data: {newStatus: newStatus, orderNo: orderNo},
-                    success: function (data) 
-                    { 
-                        console.log('POST success!'); 
-                        window.location.href = "/admin/orders"; 
-                    },
-            });
-        });
+        // add decimal 
+        var decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).text();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            $(decimal[i]).text(newValue);
+        }
     })
 
 </script>

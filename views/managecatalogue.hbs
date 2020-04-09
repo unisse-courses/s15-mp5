@@ -29,12 +29,20 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Price</span>
                                     </div>
-                                    <input name="price" type="number" class="form-control font-weight-bold" value='' aria-label="" aria-describedby="basic-addon1" required>
+                                    <input name="price" type="number" class="form-control font-weight-bold decimal" value='' aria-label="" aria-describedby="basic-addon1" required>
                                 </div>          
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='fileupload-temp btn btn-light border mx-3'>
+                            <div class="fileupload-temp input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Icon</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class="custom-file-input">
+                                    <label class="custom-file-label" for="itemImg">Choose file</label>
+                                </div>
+                            </div>
                             <button type="button" class='cancel-temp btn btn-danger border mx-3'>Cancel</button>
                             <button class='confirm-temp btn btn-success border mx-3'>Confirm</button>
                         </div>
@@ -66,7 +74,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Price</span>
                                     </div>
-                                    <input name="price" type="number" class="form-control font-weight-bold price" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
+                                    <input name="price" type="number" class="form-control font-weight-bold price decimal" value='{{this.price}}' aria-label="" aria-describedby="basic-addon1" readonly required>
                                 </div>          
                             </div>
                         </div>
@@ -74,7 +82,15 @@
                             <button type="button" class='edit btn btn-light border mx-3'>Edit</button>
                             <button type="button" class='editicon btn btn-light border mx-3'>Edit Icon</button>
                             <button type="submit" formaction="/admin/deleteProduct" class='delete btn btn-danger mx-3'>Delete Item</button>
-                            <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='fileupload btn btn-light border mx-3'>
+                            <div class="fileupload input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Icon</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name='itemImg' accept='image/png,image/jpg,.jpg,.jpeg,.png' class="custom-file-input">
+                                    <label class="custom-file-label" for="itemImg">Choose file</label>
+                                </div>
+                            </div>
                             <button type="button" class='cancel btn btn-light border mx-3'>Cancel</button>
                             <button class='confirm btn btn-success border mx-3'>Confirm</button>
                         </div>
@@ -90,7 +106,7 @@
 
 <script>
     $(document).ready( function(){
-
+        
         var name;
         var price;
         var targetInputs;
@@ -166,7 +182,7 @@
         });
 
         $("#btnAdd").click( function(){
-            clone = $("#template").toggle();
+            $("#template").toggle();
         });
 
         $(".editicon").click(function ()
@@ -175,6 +191,24 @@
                 $(this).siblings().filter(".fileupload").show();
             }
         );
+
+        // Custom File Input - Show File Name
+        $('.custom-file-input').on('change',function(){
+                var fileName = $(this).val();
+                $(this).next('.custom-file-label').html(fileName);
+        })
+
+
+        // Decimal two places
+        var decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).val();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            $(decimal[i]).val(newValue);
+        }
     });
 
 </script>
