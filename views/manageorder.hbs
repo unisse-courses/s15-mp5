@@ -5,24 +5,20 @@
         <div class='container-fluid border rounded p-4'>
             <div class="row">
                 <div class="col-5">
-                    <h5>ORDER#: {{this.order_no}}</h5>
-                    <span class='font-weight-bold'>John Doe</span> - <span class='text-success'>{{this.status}}</span> <br>
+                    <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
+                    <span class='font-weight-bold'>{{this.buyername}}</span> - <span>{{this.status}}</span> <br>
                     <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
                     <span>123 Main St., Manila City, Metro Manila</span>
                     <br><br>
                     <span class='font-weight-bold'>DATE ORDERED:</span> {{this.date_of_order}} <br>
-                    <span class='font-weight-bold'>DATE ESTIMATED:</span> {{this.date_of_deliver}}
-
-                    <div class="dropdown mt-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="statusMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Change Order Status
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="statusMenu">
-                            <a class="dropdown-item">Active</a>
-                            <a class="dropdown-item">Hold</a>
-                            <a class="dropdown-item">Cancelled</a>
-                            <a class="dropdown-item">Delivered</a>
-                        </div>
+                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{this.date_of_deliver}}
+                    <br><br>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Change Status</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item changestatus" data-value='Active'>Active</a>
+                        <a class="dropdown-item changestatus" data-value='Hold'>Hold</a>
+                        <a class="dropdown-item changestatus" data-value='Cancelled'>Cancelled</a>
+                        <a class="dropdown-item changestatus" data-value='Delivered'>Delivered</a>
                     </div>
                 </div>
 
@@ -37,12 +33,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each orderitems}}
+                            {{#each this.order_items}}
                             <tr>
                                 <td>{{name}} (PHP <span class="price">{{price}}</span> X <span class="quantity">{{quantity}}</span>)</td>
-                                <td><span class="total"></span></td>
+                                <td><span class="total">{{computedPrice}}</span></td>
                             </tr>
                             {{/each}}
+                            <tr>
+                                <td>Delivery</td>
+                                <td>50.00</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -62,12 +62,31 @@
         var arr = $(".total");
         var p;
         var q;
+        
         for(i=0; i<arr.length; i++)
         {
             p = $(arr[i]).parent().parent().children().children().filter(".price").text()
             q = $(arr[i]).parent().parent().children().children().filter(".quantity").text()
-            console.log(p)
+            //console.log(p)
             $(arr[i]).text("" + p * q + ".00")
         }
+
+        $('.changestatus').click(function (){
+            newStatus = $(this).data('value');
+            orderNo = $(this).parent().siblings().filter('.orderno').data('value');
+            console.log(newStatus, orderNo);
+
+            $.ajax({
+                    url: "/admin/changeStatus",
+                    type: 'POST',
+                    data: {newStatus: newStatus, orderNo: orderNo},
+                    success: function (data) 
+                    { 
+                        console.log('POST success!'); 
+                        window.location.href = "/admin/orders"; 
+                    },
+            });
+        });
     })
+
 </script>

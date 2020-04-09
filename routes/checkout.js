@@ -10,8 +10,10 @@ const Order = require('../models/orders');
 var shoppingCartItems = null;
 
 class orderItem {
-    constructor(productno, quantity, computedPrice) {
+    constructor(productno, name, price, quantity, computedPrice) {
         this.productno = productno;
+        this.name = name;
+        this.price = price;
         this.quantity = quantity;
         this.computedPrice = computedPrice;
     }
@@ -61,10 +63,11 @@ router.post('/checkout', async (req, res) => {
         let order_items = [];
         let buyer = results.email;
         let status = "Active";
+        let buyername = results.fname + " " + results.lname;
 
         for (item of shoppingCartItems) {
             total_price += item.itemPrice;
-            let orderitem = new orderItem(item.productno, item.quantity, item.itemPrice);
+            let orderitem = new orderItem(item.productno, item.name, item.price, item.quantity, item.itemPrice);
             order_items.push(orderitem);
         }
 
@@ -72,6 +75,7 @@ router.post('/checkout', async (req, res) => {
         let order = new Order({
             status,
             buyer,
+            buyername,
             total_price,
             order_items
         });

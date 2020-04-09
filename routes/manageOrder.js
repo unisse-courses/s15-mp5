@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 
-const ObjectID = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 const Acct = require('../models/accounts');
 const Order = require('../models/orders');
 
@@ -10,7 +10,7 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
     if (!req.isAuthenticated()) { 
         res.redirect('/');
     }
-    const _id = ObjectID(req.session.passport.user);
+    const _id = ObjectId(req.session.passport.user);
     Acct.findOne({ _id }, (err, results) => {
         if (err) {
           throw err;
@@ -28,5 +28,20 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
     });
   });
 })
+
+router.post('/changeStatus', (req, res) =>
+{
+  let id = "jolo@cansana.net"; //ObjectId(req.body.orderNo);
+  let newStatus = req.body.newStatus;
+  console.log(id)
+
+  Order.updateOne({ "buyer" : id }, 
+  { 
+    "$set" : {   "status" : newStatus   }
+  })
+  
+  res.send("ok");
+
+});
 
 module.exports = router;

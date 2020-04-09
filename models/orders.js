@@ -12,6 +12,11 @@ const schema = new mongoose.Schema({
         ref: 'accounts',
         required: true
     },
+    buyername: {
+        type: String,
+        ref: 'accounts',
+        required: true
+    },
     date_of_order: {
         type: Date,
         required: true,
