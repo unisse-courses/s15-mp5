@@ -100,12 +100,13 @@ router.post('/products', (req, res, next) => {
 
 router.post('/deleteProduct', (req, res, next) => {
 
-    var id = req.body.id;
-    const _id = ObjectId(id);
-
-    Prod.deleteOne({"_id":id})
-    .then( x => {
-        res.sendStatus(204)
+    itemupload(req, res, () => {
+        var id = req.body.id;
+        const _id = ObjectId(id);
+        Prod.deleteOne({"_id": _id})
+        .then( x => {
+            res.sendStatus(204)
+        })
     })
 
     // Prod.find( {}, (err, results) => {
