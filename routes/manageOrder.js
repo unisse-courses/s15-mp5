@@ -31,16 +31,30 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
 
 router.post('/changeStatus', (req, res) =>
 {
-  let id = "jolo@cansana.net"; //ObjectId(req.body.orderNo);
-  let newStatus = req.body.newStatus;
-  console.log(id)
+  let id = ObjectId(req.body.orderNo);
+  let stat = req.body.newStatus;
 
-  Order.updateOne({ "buyer" : id }, 
-  { 
-    "$set" : {   "status" : newStatus   }
+  Order.findOne({_id: id}, (err, results) => {
+    results.status = stat;
+    
+    if(stat === "Delivered") 
+    {
+      var d = new Date();
+
+      var month = d.getMonth()+1;
+      var day = d.getDate();
+
+      var output = d.getFullYear() + '/' +
+          (month<10 ? '0' : '') + month + '/' +
+          (day<10 ? '0' : '') + day;
+      
+      results.date_of_deliver = output;
+    }
+
+    results.save();
   })
-  
-  res.send("ok");
+
+  res.send(id);
 
 });
 

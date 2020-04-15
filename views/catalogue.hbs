@@ -1,22 +1,21 @@
 <div class='mx-auto container'>
     <div class='row'>
         <div class='col-12 col-lg-9'>
-            <div class='d-none d-md-block jumbrotron rounded bg-lightblue py-5'>
-                Ad Space
+            <div class='container'>
+                <h1 class='display-5'>Catalogue</h1>
             </div>
-
-            <div class="row my-3 d-flex">
+            <div class="row my-1 d-flex">
 
                 {{#each catalogue}}
                 
                 <div class="col-8 offset-2 col-sm-6 offset-sm-0 col-md-4 col-lg-3">
                     <div class='item card border-0 my-3' data-value="{{_id}}">
                         <div class="card-body">
-                            <div class="itemPictureHolder rounded text-center">
+                            <div class="itemPictureHolder rounded text-center" data-value='{{picture}}'>
                                     <img src='itempictures/{{picture}}' class='itemPicture'>
                             </div>
-                            <div class='row itemFooter ml-2'>
-                                <div class='col itemDescription mt-1'>
+                            <div class='row itemFooter'>
+                                <div class='col itemDescription mt-1 ml-3'>
                                     <div class='row itemName'>{{name}}</div>
                                     <div class='row itemPrice' data-value="{{price}}">PHP {{price}}</div>
                                 </div>
@@ -92,7 +91,7 @@
                             </div>
                             <!-- Change to first item of the order-->
                             <div class='row itemPrice'>
-                                {{total_price}}
+                                TOTAL: PHP {{total_price}}
                             </div>
                         </div>
                     </div>
@@ -109,12 +108,13 @@
     $(document).ready(() => {
         var prevItem = null;
         class cartItem {
-            constructor(productno, name, price, quantity, itemPrice) {
+            constructor(productno, name, price, quantity, itemPrice, itemImg) {
                 this.productno = productno;
                 this.name = name;
                 this.price = price;
                 this.quantity = quantity;
                 this.itemPrice = itemPrice;
+                this.itemImg = itemImg;
             }
         }
         var shoppingCartItems = [];
@@ -139,7 +139,7 @@
             }
         });
 
-        function changeShoppingCart(productno, name, price, newQuantity, itemPrice)
+        function changeShoppingCart(productno, name, price, newQuantity, itemPrice, itemImg)
         {
             var item = shoppingCartItems.find(item => productno == item.productno);
             if (item != null && newQuantity != 0)
@@ -156,7 +156,7 @@
             else
             {
                 // Item doesn't exist, push to cart
-                var newItem = new cartItem(productno, name, price, newQuantity, itemPrice);
+                var newItem = new cartItem(productno, name, price, newQuantity, itemPrice, itemImg);
                 shoppingCartItems.push(newItem);
             }
 
@@ -195,10 +195,11 @@
             var productno = $(this).parents().filter(".item").data('value');
             var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
             var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+            var itemImg = $(this).parents().filter('.itemFooter').siblings().filter('.itemPictureHolder').data('value');
             val++;
             var itemPrice = price*val;
 
-            changeShoppingCart(productno, name, price, val, itemPrice);
+            changeShoppingCart(productno, name, price, val, itemPrice, itemImg);
 
             $(this).parent().siblings("input").val(val);
             console.log(productno, shoppingCartItems)
@@ -212,10 +213,11 @@
                 var productno = $(this).parents().filter(".item").data('value');
                 var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
                 var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+                var itemImg = $(this).parents().filter('.itemFooter').siblings().filter('.itemPictureHolder').data('value');
                 val--;
                 var itemPrice = price*val;
 
-                changeShoppingCart(productno, name, price, val, itemPrice);
+                changeShoppingCart(productno, name, price, val, itemPrice, itemImg);
 
                 $(this).parent().siblings("input").val(val);
                 console.log(productno, shoppingCartItems);
@@ -230,9 +232,10 @@
                 var productno = $(this).parents().filter(".item").data('value');
                 var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
                 var price = parseInt($(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemPrice").data("value"));
+                var itemImg = $(this).parents().filter('.itemFooter').siblings().filter('.itemPictureHolder').data('value');
                 var itemPrice = price*val;
 
-                changeShoppingCart(productno, name, price, val, itemPrice);
+                changeShoppingCart(productno, name, price, val, itemPrice, itemImg);
 
                 $(this).val(val);
                 console.log(productno, shoppingCartItems)

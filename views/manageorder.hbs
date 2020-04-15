@@ -29,19 +29,19 @@
                         <thead>
                             <tr>
                                 <th>TOTAL</th>
-                                <th class="decimal">{{this.total_price}}</th>
+                                <th class='text-right'>PHP <span class='decimal'>{{this.total_price}}</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#each this.order_items}}
                             <tr>
                                 <td>{{name}} (PHP <span class="price decimal">{{price}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
-                                <td><span class="total decimal"></span></td>
+                                <td class='text-right'><span class="total decimal"></span></td>
                             </tr>
                             {{/each}}
                             <tr>
                                 <td>Delivery</td>
-                                <td>50.00</td>
+                                <td class='text-right'>50.00</td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,6 +80,22 @@
             newValue = newValue.toFixed(2);
             $(decimal[i]).text(newValue);
         }
-    })
+    });
+
+    $('.changestatus').click(function () {
+        var orderNo = $(this).parent().siblings().filter('.orderno').data('value');
+        var newStatus = $(this).data('value');
+
+        $.ajax({
+            url: "changeStatus",
+            type: 'POST',
+            data: {orderNo: orderNo, newStatus: newStatus},
+            success: function (data) 
+            { 
+                console.log(newStatus); 
+                window.location.href = "/admin/orders"; 
+            },
+        });
+    });
 
 </script>
