@@ -24,13 +24,9 @@ npm start
     ##### Normal User: 
     - Email: alexis_louis_delacruz@dlsu.edu.ph 
     - Password: abc
-    <br />
+    
     ##### Admin User: 
     - Email: admin@lou 
     - Password: admin
                 
 5. Or Try to **Register** a normal account.
-
-Notice: 
-- Input Validation (Client-Side) for Register is incomplete
-- Order Page is incomplete
