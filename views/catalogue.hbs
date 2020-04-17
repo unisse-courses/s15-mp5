@@ -17,7 +17,7 @@
                             <div class='row itemFooter'>
                                 <div class='col itemDescription mt-1 ml-3'>
                                     <div class='row itemName'>{{name}}</div>
-                                    <div class='row itemPrice' data-value="{{price}}">PHP {{price}}</div>
+                                    <div class='row itemPrice' data-value="{{price}}">₱ <span class="decimal">{{price}}</span></div>
                                 </div>
                                 <div class='col addToCart mt-1'>
                                     <div class="input-group">
@@ -90,8 +90,8 @@
                                 {{date_of_order}}
                             </div>
                             <!-- Change to first item of the order-->
-                            <div class='row itemPrice'>
-                                TOTAL: PHP {{total_price}}
+                            <div class='row itemPrice '>
+                                TOTAL: ₱ <span class='decimal'>{{total_price}}</span>
                             </div>
                         </div>
                     </div>
@@ -119,6 +119,24 @@
         }
         var shoppingCartItems = [];
 
+        // commas
+        
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }   
+
+        // add prices past orders
+        decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).text();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            newValue = numberWithCommas(newValue);
+            $(decimal[i]).text(newValue);
+        }
+
         $(".itemPicture").click(function () {
             currItem = $(this).parent().parent().parent();
             currItem.children('.card-body').children('.itemFooter').children(".itemDescription").css("display", "none");
@@ -142,11 +160,15 @@
         function changeShoppingCart(productno, name, price, newQuantity, itemPrice, itemImg)
         {
             var item = shoppingCartItems.find(item => productno == item.productno);
+        
             if (item != null && newQuantity != 0)
             {
                 // If its part of the shopping cart, update cart
+                //itemPrice = numberWithCommas(itemPrice)
+                //console.log(numberWithCommas(itemPrice))
                 item.quantity = newQuantity;
                 item.itemPrice = itemPrice;
+                
             }
             else if (item != null && newQuantity == 0)
             {
@@ -166,6 +188,8 @@
 
             for(x of shoppingCartItems)
             {
+                formattedPrice = numberWithCommas(x.itemPrice.toFixed(2))
+                console.log(formattedPrice)
                 var htmlstring = 
                 `
                 <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
@@ -177,7 +201,7 @@
                             ${x.price} X ${x.quantity}
                         </div>
                     </div>
-                    <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>${x.itemPrice.toFixed(2)}</div>
+                    <div class='col-5 d-flex justify-content-end float-right text-right itemPrice'>${formattedPrice}</div>
                 </div>
                 `;
 
@@ -185,7 +209,8 @@
                 cartTotalPrice += x.itemPrice;
             }
 
-            $('.totalPrice').html(cartTotalPrice.toFixed(2));
+            formattedTotalPrice = numberWithCommas(cartTotalPrice.toFixed(2))
+            $('.totalPrice').html(formattedTotalPrice);
             
         }
 

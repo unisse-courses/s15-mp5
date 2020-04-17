@@ -1,6 +1,121 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+            <div class="container-fluid" id="ordercont">
+                <h2>Order Summary</h2>
+                <div class="jumbotron bg-grey" id="orderbox">
+
+                    {{#each order}}
+                    <div class='row my-4'>
+                        <div class='media border container rounded'>
+                            <img class="d-flex mr-3 itemPictureCheckout" src="itempictures/{{itemImg}}" alt="Generic placeholder image">
+                            <div class="media-body my-auto d-flex">
+                                <div class='col-7 text-left'>
+                                    <div class='row'>
+                                        {{name}}
+                                    </div>
+                                    <div class='row itemPrice'>
+                                        {{price}} X {{quantity}}
+                                    </div>
+                                </div>
+                                <div class='col-5 float-right text-right decimal'>{{itemPrice}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <div class="container-fluid">
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>Delivery Charge</h5>
+                            </div>
+                            <h6 class="text-right">PHP</h6>
+                            <h6 class="text-right">50.00</h6>
+                        </div>
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>TOTAL</h5>
+                            </div>
+                            <h6 class="text-right">PHP</h6>
+                            <h6 class="decimal text-right">{{totalPrice}}</h6>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid" id="accountcont">
+                    <h2>Personal Information</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <div id="acctformcont" class="container">
+                            <div class="form-group">
+                                <label for="fname">First Name</label>
+                                <input class="form-control" type="text" id="fname" value='{{fname}}' placeholder="First Name" readonly>
+                            </div>
+                             <div class="form-group">
+                                <label for="lname">Last Name</label>
+                                <input class="form-control" type="text" id="lname" value='{{lname}}' placeholder="Last Name" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input class="form-control" type="email" id="email" value='{{email}}' placeholder="Email" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Contact Number</label>
+                                <input class="form-control" type="text" id="number" value='{{contactNumber}}' pattern="^(09)\d{9}$"
+                                    placeholder="Contact Number" readonly>
+                                <span id="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="add1">Address Line 1</label>
+                                <input class="form-control" type="text" id="add1" value='{{addressLine1}}' placeholder="Unit / Block no., Street no., Subd.," readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="add2">Address Line 2</label>
+                                <input class="form-control" type="text" id="add2" value='{{addressLine2}}'placeholder="Brgy., Municipality, City / Province, Region" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class='row jumbotron mx-1 d-block py-5'>
+        <h1>Guidelines</h1>
+        <p>These are some guidelines for delivering. Please read and comply with these.
+        <ol>
+            <li>Deliveries will take at most 1 week in the Metro Manila areas and 2-3 weeks outside the Metro Manila area.</li>
+            <li>Please prepare the exact amount during payment. We cannot ensure change.</li>
+            <li>Please check your account information if they are up to date and correct. Wrong information will cause delays to your delivery.</li>
+        </ol>
+        </p>
+        <button class='btn btn-success border-0' id='confirmDelivery'>Proceed with Delivery</button>
+    </div>
+</div>
+
+
 <script>
 $(document).ready(function(){
 
+    // commas
+        
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }   
+
+        // add prices past orders
+        decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).text();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            newValue = numberWithCommas(newValue);
+            $(decimal[i]).text(newValue);
+        }
+
+    // Buttons
     var num;
     var add1;
     var add2;
@@ -64,96 +179,3 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="container">
-    <div class="row mt-4">
-        <div class="col-sm-12 col-md-12 col-lg-6 px-0">
-            <div class="container-fluid" id="ordercont">
-                <h2>Order Summary</h2>
-                <div class="jumbotron bg-grey" id="orderbox">
-
-                    {{#each order}}
-                    <div class='row my-4'>
-                        <div class='media border container rounded'>
-                            <img class="d-flex mr-3 itemPictureCheckout" src="itempictures/{{itemImg}}" alt="Generic placeholder image">
-                            <div class="media-body my-auto d-flex">
-                                <div class='col-7 text-left'>
-                                    <div class='row'>
-                                        {{name}}
-                                    </div>
-                                    <div class='row itemPrice'>
-                                        {{price}} X {{quantity}}
-                                    </div>
-                                </div>
-                                <div class='col-5 float-right text-right'>{{itemPrice}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-
-                    <div id="totalcost">
-                        <div id="totalp">
-                            <h5>Delivery Charge</h5>
-                        </div>
-                        <h6>PHP</h6>
-                        <h6>50.00</h6>
-                    </div>
-                    
-                    <div id="totalcost">
-                        <div id="totalp">
-                            <h5>TOTAL</h5>
-                        </div>
-                        <h6>PHP</h6>
-                        <h6>{{totalPrice}}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-lg-6 px-0">
-                <div class="container-fluid" id="accountcont">
-                    <h2>Personal Information</h2>
-                    <div class="jumbotron bg-grey" id="accountbox">
-                        <div id="acctformcont" class="container">
-                            <div class="form-group">
-                                <label for="fname">First Name</label>
-                                <input class="form-control" type="text" id="fname" value='{{fname}}' placeholder="First Name" readonly>
-                            </div>
-                             <div class="form-group">
-                                <label for="lname">Last Name</label>
-                                <input class="form-control" type="text" id="lname" value='{{lname}}' placeholder="Last Name" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input class="form-control" type="email" id="email" value='{{email}}' placeholder="Email" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="number">Contact Number</label>
-                                <input class="form-control" type="text" id="number" value='{{contactNumber}}' pattern="^(09)\d{9}$"
-                                    placeholder="Contact Number" readonly>
-                                <span id="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="add1">Address Line 1</label>
-                                <input class="form-control" type="text" id="add1" value='{{addressLine1}}' placeholder="Unit / Block no., Street no., Subd.," readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="add2">Address Line 2</label>
-                                <input class="form-control" type="text" id="add2" value='{{addressLine2}}'placeholder="Brgy., Municipality, City / Province, Region" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    <div class='row jumbotron mx-1 d-block py-5'>
-        <h1>Guidelines</h1>
-        <p>These are some guidelines for delivering. Please read and comply with these.
-        <ol>
-            <li>Deliveries will take at most 1 week in the Metro Manila areas and 2-3 weeks outside the Metro Manila area.</li>
-            <li>Please prepare the exact amount during payment. We cannot ensure change.</li>
-            <li>Please check your account information if they are up to date and correct. Wrong information will cause delays to your delivery.</li>
-        </ol>
-        </p>
-        <button class='btn btn-success border-0' id='confirmDelivery'>Proceed with Delivery</button>
-    </div>
-</div>

@@ -61,15 +61,13 @@ ul {
 
 #totalcost {
     display: grid;
-    grid-template-columns: 65% 10% 25%;
-    grid-column-gap: 1em;
+    grid-template-columns: 55% 20% 20%;
+    grid-column-gap: 0.5em;
     margin-top: 1em;
     margin-bottom: -1em;
 }
 
-#totalp {
-    margin-left: 1em;
-}
+
 
 .itemPictureCheckout {
     height: 75px;
