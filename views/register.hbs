@@ -2,6 +2,12 @@
     <div class="container mx-auto my-5">
         <h2>Register a new account</h2>
         <div class="jumbotron bg-grey" id="accountbox">
+            <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span id="msg">{{error}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <form action="/register" method="POST" autocomplete="off" novalidate>
                 <div id="acctformcont" class="container">
                     <div class="form-group">
@@ -47,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label for="city">City</label>
-                        <select class="custom-select" id="city" placeholder="City">
+                        <select name="city" class="custom-select" id="city" placeholder="City">
                             {{>cities}}
                         </select>
                     </div>
@@ -65,6 +71,10 @@
 
     $(document).ready( function(){
 
+        if( $("#msg").text() == "") 
+        {
+            $("#alert").hide()
+        }
         // First Name Validation
         $(".validate").keyup(function(){
             if (this.checkValidity() === false) {
@@ -147,7 +157,7 @@
             }
 
             // validate city 
-            if ($("#city").val() === "City") {
+            if ($("#city").val() == "City") {
                 $("#city").addClass("is-invalid");
             }
             else{
@@ -177,62 +187,6 @@
             return valid
 
         })
-
-
-
-
-        
-
-        
-
-
     })
-
-
-    /*
-    var form = document.querySelector('.needs-validation');
-
-
-    form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-    })
-
-    
-    form.addEventListener('#pw2', function(event) {
-
-
-        if(pw1 === '')
-        {
-            $("#pwError").text("Please fill in your desired password")
-
-        }
-        else{
-            $("#pwError").text("");
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        if(pw1 != pw2)
-        {
-            $("#confirmpw").text("Passwords do not match");
-        }
-        else{
-                       event.preventDefault();
-            event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-    })
-    */
-
-
-
-    
-
     
 </script>

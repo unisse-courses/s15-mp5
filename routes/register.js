@@ -13,10 +13,13 @@ router.post('/register', (req,res) => {
 
     const { fname, lname, email, number, pw1, pw2, add1, add2, city, ifAdmin } = req.body;
 
+
     Acct.findOne({ email: email})
     .then( acct => {
         if(acct){
-            console.log("user exists with that email");
+            res.render( 'register', {
+                error: "User already exists with the email"
+            })
         }
         else{
             const newUser = new Acct({
@@ -38,6 +41,7 @@ router.post('/register', (req,res) => {
                     newUser.pw1 = hash;
                     newUser.save()
                     .then(acct => {
+                        req.flash("msg", "Registration Successful")
                         res.redirect('/');
                     })
                     .catch(err => console.log(err));

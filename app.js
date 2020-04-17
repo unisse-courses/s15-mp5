@@ -56,7 +56,15 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Flash
 app.use(flash());
+app.use( (req, res, next) => {
+    res.locals.msg = req.flash("msg");
+    res.locals.error = req.flash('error');
+    next();
+})
+
 
 app.use((req, res, next) => {
     res.locals.loggedIn = req.isAuthenticated();

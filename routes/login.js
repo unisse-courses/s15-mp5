@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/logout', (req, res) => {
     req.logout();
-    //req.flash('success_msg', 'You are logged out');
+    req.flash('msg', 'You are logged out');
     res.redirect('/');
 });
 

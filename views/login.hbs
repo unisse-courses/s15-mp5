@@ -1,5 +1,17 @@
 <div class='container vertical-center'>
     <div class='container bg-grey mx-auto login'>
+            <div id="alert" class="mt-4 alert alert-success alert-dismissible fade show" role="alert">
+                <span id="msg">{{msg}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="alert2" class="mt-4 alert alert-danger alert-dismissible fade show" role="alert">
+                <span id="err">{{error}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <div class="row d-flex align-items-center mt-5">
             <img src='pharmago-logo.png' class='mx-auto' height='50px'>
         </div>
@@ -19,3 +31,13 @@
         </div>
     </div>
 </div>
+<script>
+    if( $("#msg").text() == "") 
+    {
+        $("#alert").hide()
+    }
+    if( $("#err").text() == "") 
+    {
+        $("#alert2").hide()
+    }
+</script>
