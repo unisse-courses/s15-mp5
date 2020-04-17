@@ -8,6 +8,8 @@ const hbs = require('handlebars');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const moment = require('moment');
+
 
 const app = express();
 require('./config/passport')(passport);
@@ -36,10 +38,28 @@ app.engine('hbs', exphbs({
     //defaultview: 'main',
     layoutsDir: __dirname + '/views/layouts/',
     partialsDir: __dirname + '/views/partials/',
-    handlebars: allowInsecurePrototypeAccess(hbs)
+    handlebars: allowInsecurePrototypeAccess(hbs),
+    helpers: 
+    {
+        formatDate: function(datetime) 
+        {
+            if (datetime !== null) {
+                format = "MMMM DD YYYY";
+                return moment(datetime).format(format);
+            }
+            else {
+                return "";
+            }
+        },
+
+        formatPrice: function(num)
+        {
+            return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+    }
 }))
 
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs');
 
 // Body Parser
 app.use(express.urlencoded({ extended: true }));
@@ -77,6 +97,7 @@ app.use('/', require('./routes/register'));
 app.use('/', require('./routes/catalogue'));
 app.use('/', require('./routes/profile'));
 app.use('/', require('./routes/checkout'));
+app.use('/', require('./routes/myorders'));
 app.use('/admin', require('./routes/manageOrder'));
 app.use('/admin', require('./routes/catalogue'));
 app.use('/admin', require('./routes/manageCatalogue'));

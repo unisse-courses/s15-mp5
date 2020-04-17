@@ -1,3 +1,20 @@
+<script>
+$(document).ready(function(){
+    $("#confirmDelivery").click(function () {
+        $.ajax({
+            url: "/checkout",
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) 
+            { 
+                console.log('POST success!'); 
+                window.location.href = "/catalogue"; 
+            },
+        });
+    })
+});
+</script>
+
 <div class="container">
     <div class="row mt-4">
         <div class="col-sm-12 col-md-12 col-lg-6 px-0">

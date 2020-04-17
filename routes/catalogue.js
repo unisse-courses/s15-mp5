@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 const mongoose = require("mongoose");
+const moment = require('moment');
 
 const ObjectID = require('mongodb').ObjectID;
 const Acct = require('../models/accounts')
@@ -22,7 +23,7 @@ router.get('/catalogue', ensureAuthenticated, (req,res) => {
 
         //console.log(results);
 
-        mongoose.model('orders').find({buyer: req.user.email}, (err, orderList) =>
+        mongoose.model('orders').find({buyer: req.user.email}).sort({'date_of_order': 'desc'}).limit(3).exec((err, orderList) =>
         {
             mongoose.model('products').find({}, (err, products) => {
                 res.render('catalogue', 
