@@ -99,6 +99,10 @@
 <script>
     $(document).ready( function(){
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         // breakdown of total: price x quantity
 
         var arr = $(".total");
@@ -122,6 +126,7 @@
             newValue = $(decimal[i]).text();
             newValue = parseFloat(newValue);
             newValue = newValue.toFixed(2);
+            newValue = numberWithCommas(newValue);
             $(decimal[i]).text(newValue);
         }
     });
