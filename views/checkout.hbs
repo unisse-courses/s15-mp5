@@ -35,27 +35,28 @@ $(document).ready(function(){
                                         {{price}} X {{quantity}}
                                     </div>
                                 </div>
-                                <div class='col-5 float-right text-right'>{{itemPrice}}</div>
+                                <div class='col-5 float-right text-right decimal'>{{itemPrice}}</div>
                             </div>
                         </div>
                     </div>
                     {{/each}}
-
-                    <div id="totalcost">
-                        <div id="totalp">
-                            <h5>Delivery Charge</h5>
+                    <div class="container-fluid">
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>Delivery Charge</h5>
+                            </div>
+                            <h6 class="text-right">PHP</h6>
+                            <h6 class="text-right">50.00</h6>
                         </div>
-                        <h6>PHP</h6>
-                        <h6>50.00</h6>
+                        <div id="totalcost">
+                            <div id="totalp">
+                                <h5>TOTAL</h5>
+                            </div>
+                            <h6 class="text-right">PHP</h6>
+                            <h6 class="decimal text-right">{{totalPrice}}</h6>
+                        </div>
                     </div>
                     
-                    <div id="totalcost">
-                        <div id="totalp">
-                            <h5>TOTAL</h5>
-                        </div>
-                        <h6>PHP</h6>
-                        <h6>{{totalPrice}}</h6>
-                    </div>
                 </div>
             </div>
         </div>
@@ -108,3 +109,90 @@ $(document).ready(function(){
         <button class='btn btn-success border-0' id='confirmDelivery'>Proceed with Delivery</button>
     </div>
 </div>
+
+
+<script>
+$(document).ready(function(){
+
+    // commas
+        
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }   
+
+        // add prices past orders
+        decimal = $(".decimal")
+
+        for(i=0; i<decimal.length; i++)
+        {
+            newValue = $(decimal[i]).text();
+            newValue = parseFloat(newValue);
+            newValue = newValue.toFixed(2);
+            newValue = numberWithCommas(newValue);
+            $(decimal[i]).text(newValue);
+        }
+
+    // Buttons
+    var num;
+    var add1;
+    var add2;
+
+    $("#btnEdit").click(function(){
+        num = $("#number").val();
+        add1 = $("#add1").val();
+        add2 = $("#add2").val();
+        $(this).hide();
+        $("#number").prop("readonly", false);
+        $("#add1").prop("readonly", false);
+        $("#add2").prop("readonly", false);
+        $("#btnCancel").css("display","block");
+        $("#btnConfirm").css("display","block");
+    });
+
+    $("#btnCancel").click(function(){
+        $("#btnCancel").css("display","none");
+        $("#btnConfirm").css("display","none");
+        $("#btnEdit").show();
+        $("#number").val(num);
+        $("#add1").val(add1);
+        $("#add2").val(add2);
+        $("#error").text("");
+    });
+
+    $("#btnConfirm").click(function(){
+
+        var num = $("#number").val();
+        console.log(num);
+        var regex = /^(09)\d{9}$/;
+        if( regex.test(num) == false )
+        {
+            $("#error").text("Must be in 11-digit form: 09XXXXXXXXX");
+        }
+        else
+        {
+            $("#error").text("");
+            $("#btnCancel").css("display","none");
+            $("#btnConfirm").css("display","none");
+            $("#btnEdit").show();
+            $("#number").prop("readonly", true);
+            $("#add1").prop("readonly", true);
+            $("#add2").prop("readonly", true);
+        }
+        
+    });
+
+    $("#confirmDelivery").click(function () {
+        $.ajax({
+            url: "/checkout",
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) 
+            { 
+                console.log('POST success!'); 
+                window.location.href = "/catalogue"; 
+            },
+        });
+    })
+});
+</script>
+
