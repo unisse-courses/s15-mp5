@@ -1,28 +1,21 @@
 <div class='mx-auto container'>
-    <div class="container"><h3>Orders</h3></div>
+    <div class="container"><h3>My Orders</h3></div>
     {{#each activeorders}}
     <div class='row my-3'>
         <div class='container-fluid border border-0 rounded'>
             <div class='row bg-{{this.status}}'>
                 &nbsp;
             </div>
-            <div class="row p-4 bg-light">
+            <div class="row pt-4 px-4 bg-light">
                 <div class="col-5">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
                     <span class='font-weight-bold'>{{this.buyername}}</span> - <span>{{this.status}}</span> <br>
                     <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
                     <span>123 Main St., Manila City, Metro Manila</span>
                     <br><br>
-                    <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
-                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
+                    <span class='font-weight-bold'>DATE ORDERED:</span> {{this.date_of_order}} <br>
+                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{this.date_of_deliver}}
                     <br><br>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Change Status</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item changestatus" data-value='Active'>Active</a>
-                        <a class="dropdown-item changestatus" data-value='Hold'>Hold</a>
-                        <a class="dropdown-item changestatus" data-value='Cancelled'>Cancelled</a>
-                        <a class="dropdown-item changestatus" data-value='Delivered'>Delivered</a>
-                    </div>
                 </div>
 
                 <div class='col-7'>
@@ -53,33 +46,24 @@
         </div>
     </div>
     {{/each}}
-
     <br><br><br>
-    <div class="container"><h3>Delivered Orders</h3></div>
-
+    <div class="container"><h3>Past Orders</h3></div>
     {{#each pastorders}}
-    <div class='row my-3'>
+    <div class='row my-5'>
         <div class='container-fluid border border-0 rounded'>
             <div class='row bg-{{this.status}}'>
                 &nbsp;
             </div>
-            <div class="row p-4 bg-light">
+            <div class="row pt-4 px-4 bg-light">
                 <div class="col-5">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
                     <span class='font-weight-bold'>{{this.buyername}}</span> - <span>{{this.status}}</span> <br>
                     <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
                     <span>123 Main St., Manila City, Metro Manila</span>
                     <br><br>
-                    <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
-                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
+                    <span class='font-weight-bold'>DATE ORDERED:</span> {{this.date_of_order}} <br>
+                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{this.date_of_deliver}}
                     <br><br>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Change Status</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item changestatus" data-value='Active'>Active</a>
-                        <a class="dropdown-item changestatus" data-value='Hold'>Hold</a>
-                        <a class="dropdown-item changestatus" data-value='Cancelled'>Cancelled</a>
-                        <a class="dropdown-item changestatus" data-value='Delivered'>Delivered</a>
-                    </div>
                 </div>
 
                 <div class='col-7'>
@@ -110,7 +94,6 @@
         </div>
     </div>
     {{/each}}
-
 </div>
 
 <script>

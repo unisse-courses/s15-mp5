@@ -3,6 +3,30 @@
     width: 500px;
 }
 
+.file-width
+{
+    width: 500px;
+}
+
+.bg-Active
+{
+    background-color: #31E697;
+}
+
+.bg-Hold
+{
+    background-color: #FFF29E;
+}
+
+.bg-Cancelled
+{
+    background-color: #FF4C4C;
+}
+
+.bg-Delivered
+{
+    background-color: #B5B5B5;
+}
 .vertical-center
 {
     min-height: 100vh;

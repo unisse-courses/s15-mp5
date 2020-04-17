@@ -18,12 +18,19 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
 
     Order.find({}, (err, result) => {
       if (err) throw err;
-      //console.log(result);
+      var active = result.filter(obj => {
+          return obj.status !== "Delivered";
+      })
+
+      var past = result.filter(obj => {
+          return obj.status === "Delivered";
+      })
 
       res.render('manageOrder', {title: 'Admin - Orders',
         fname: results.fname,
         profilepic: req.user.profilepic,
-        orders: result,
+        activeorders: active,
+        pastorders: past
         });
     });
   });

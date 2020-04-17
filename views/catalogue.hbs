@@ -79,25 +79,28 @@
             <div class='card bg-grey border-0 rounded mt-4'>
                 <div class='card-body'>
                     <div class='card-title'>
-                        Past Orders
+                        Recent Orders
                     </div>
                     <!-- Change to a clickable: Redirect to checkout page with items of this order -->
 
                     {{#each orders}}
-                    <div class='d-flex itemShoppingCart container rounded border border-dark bg-white px-1 my-2'>
+                    <div class='d-flex itemShoppingCart container rounded border border-dark px-1 my-2'>
                         <div class='col-7 text-left'>
                             <div class='row'>
-                                {{date_of_order}}
+                                {{formatDate date_of_order}}
+                            </div>
+                            <div class='row'>
+                                {{order_items.0.name}}...
                             </div>
                             <!-- Change to first item of the order-->
                             <div class='row itemPrice'>
-                                TOTAL: PHP {{total_price}}
+                                PHP {{total_price}}
                             </div>
                         </div>
                     </div>
                     {{/each}}
-
                 </div>
+                <a class='btn btn-primary bg-lightblue card-footer border-0' href='/myorders'>My Orders</a>
             </div>
         </div>
     </div>
