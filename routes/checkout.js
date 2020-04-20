@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const ObjectID = require('mongodb').ObjectID;
 const Acct = require('../models/accounts');
-const Order = require('../models/orders');
+const Orders = require('../models/orders');
 
 var shoppingCartItems = null;
 
@@ -28,12 +28,9 @@ router.post('/passCheckout', (req,res,next) => {
 router.get('/checkout', ensureAuthenticated, (req,res) => {
     
     const _id = ObjectID(req.session.passport.user);
-  
-    Acct.findOne({ _id }, (err, results) => {
-        if (err) {
-            throw err;
-            }
-    
+
+    Acct.getById(_id, function(results){
+        
         var total = 0;
         for(item of shoppingCartItems)
         {
@@ -45,7 +42,7 @@ router.get('/checkout', ensureAuthenticated, (req,res) => {
             order: shoppingCartItems,
             totalPrice: total.toFixed(2),
             fname: results.fname,
-            profilepic: req.user.profilepic,
+            profilepic: results.profilepic,
             lname: results.lname,
             email: results.email,
             contactNumber: results.number,
@@ -59,7 +56,8 @@ router.post('/checkout', async (req, res) => {
 
     const _id = ObjectID(req.session.passport.user);
 
-    Acct.findOne({ _id }, (err, results) => {
+    Acct.getById(_id, function(results){
+        
         let total_price = 50;
         let order_items = [];
         let buyer = results.email;
@@ -73,23 +71,23 @@ router.post('/checkout', async (req, res) => {
         }
 
         // create new order
-        let order = new Order({
-            status,
-            buyer,
-            buyername,
-            total_price,
-            order_items
-        });
+        // let order = new Order({
+        //     status,
+        //     buyer,
+        //     buyername,
+        //     total_price,
+        //     order_items
+        // });
 
-        if(order) console.log('order items successfully added to order');
-        else console.log('error in adding order items to order');
+        // if(order) console.log('order items successfully added to order');
+        // else console.log('error in adding order items to order');
 
-        console.log(order)
-        order.save();
+        // console.log(order)
+        Orders.create(status, buyer, buyername, total_price, order_items)
 
-        res.send(order);
+        res.send(status);
+        
     })
-
 });
 
 module.exports = router;

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const ObjectID = require('mongodb').ObjectID;
 const Acct = require('../models/accounts');
-const Order = require('../models/orders');
+const Orders = require('../models/orders');
 
 /* var shoppingCartItems = null;
 
@@ -23,29 +23,26 @@ class orderItem {
 router.get('/myorders', ensureAuthenticated, (req,res) => {
     
     const _id = ObjectID(req.session.passport.user);
+
+    Acct.getById(_id, function(results){
+      
+        Orders.getAll(function(orderList){
   
-    Acct.findOne({ _id }, (err, results) => {
-        if (err) {
-            throw err;
-        }
-
-        Order.find({ buyer: results.email }, (err, results) => {
-            var active = results.filter(obj => {
-                return obj.status !== "Delivered";
-            })
-
-            var past = results.filter(obj => {
-                return obj.status === "Delivered";
-            })
-
-            res.render('myorders', {title: 'My Orders',
-                activeorders: active,
-                pastorders: past,
-                fname: req.user.fname,
-                profilepic: req.user.profilepic,
-            })
+          var active = orderList.filter(obj => {
+            return obj.status !== "Delivered";
+          })
+  
+          var past = orderList.filter(obj => {
+            return obj.status === "Delivered";
+          })
+  
+          res.render('manageOrder', {title: 'Admin - Orders',
+            fname: results.fname,
+            profilepic: results.profilepic,
+            activeorders: active,
+            pastorders: past
+          });
         })
-
     })
 })
 

@@ -30,11 +30,9 @@ const dpupload = multer({storage: dpstrategy, fileFilter: fileFilter});
 router.get('/profile', ensureAuthenticated, (req, res, next) => {
 
     const _id = ObjectID(req.session.passport.user);
-    Acct.findOne({ _id }, (err, results) => {
-        if (err) {
-          throw err;
-      }
-  
+    
+    Acct.getById(_id, function(results){
+        
       res.render('profile', {title: 'Profile',
         fname: results.fname,
         profilepic: req.user.profilepic,
@@ -44,9 +42,9 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
         add1: results.add1,
         add2: results.add2,
         city: results.city,
-        profilepic: req.user.profilepic
+        profilepic: results.profilepic
       })
-  });
+  })
 })
 
 router.post('/profile', function(req, res, next) {
@@ -59,33 +57,22 @@ router.post('/profile', function(req, res, next) {
 
   //var id = req.body.id;
   const _id = ObjectID(req.session.passport.user);
+  // console.log(_id)
+  // console.log(number)
+  // console.log(add1)
+  // console.log(add2)
+  // console.log(city)
 
-  Acct.updateOne({ "_id" : _id }, 
-  { "$set" : 
-    {"number" : number, 
-      "add1" : add1,
-      "add2" : add2,
-      "city" : city
-    }
-  })
-  .then( x => {
-    res.sendStatus(204)
-  })
-  
+  Acct.update(_id, number, add1, add2, city);
+  res.sendStatus(204);
 });
 
 router.post('/profilepicture', dpupload.single('profilePic') ,function(req, res, next) {
 
   const _id = ObjectID(req.session.passport.user);
-
-  Acct.updateOne({ "_id" : _id }, 
-  { "$set" : 
-    {"profilepic": req.file.filename}
-  })
-  .then( x => {
-    res.redirect('/profile');
-  })
-  
+  const picture = req.file.filename;
+  Acct.updatePicture(_id, picture);
+  res.redirect('/profile');
 });
 
 router.post('/changepassword' ,function(req, res, next) {
@@ -97,19 +84,10 @@ router.post('/changepassword' ,function(req, res, next) {
     bcrypt.genSalt(10, (err, salt) => 
       bcrypt.hash(req.body.ps1, salt, (err, hash) => {
         if(err) throw err;
-        //Hashed password
-        Acct.updateOne({ "_id" : _id }, 
-        { "$set" : 
-          {
-            "pw1": hash
-          }
-        })
-        .then( x => {
-          res.redirect('/profile');
-        })
+        Acct.updatePassword(_id, hash)
+        res.redirect('/profile');
     }))
   }
-  
 });
 
 module.exports = router;

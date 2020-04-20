@@ -8,7 +8,7 @@ const Acct = require('../models/accounts');
 module.exports = function(passport){
     passport.use(
         new LocalStrategy({usernameField: 'email', passwordField: 'pw1'}, (email, password, done) => {
-            Acct.findOne({ email: email})
+            Acct.passport(email)
             .then( acct => {
                 if(!acct){
                     return done(null, false, {message: "Email is not registered"});
@@ -32,9 +32,9 @@ module.exports = function(passport){
     });
     
     passport.deserializeUser(function(id, done) {
-        Acct.findById(id, function(err, user) {
-            done(err, user);
-        });
+        var doneParam = done;
+        Acct.passportId(id, doneParam);
+        
     });
 
 }

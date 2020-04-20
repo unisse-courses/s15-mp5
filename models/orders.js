@@ -37,6 +37,38 @@ const schema = new mongoose.Schema({
     }
 });
 
-const Model = mongoose.model('orders', schema);
+var Orders = mongoose.model('orders', schema);
 
-module.exports = Model;
+exports.create = function(status, buyer, buyername, total_price, order_items){
+
+    let order = new Orders({
+            status,
+            buyer,
+            buyername,
+            total_price,
+            order_items
+    });
+
+    order.save()
+}
+
+exports.getByBuyer = function(email, next){
+    Orders.find({buyer: email}).sort({'date_of_order': 'desc'}).limit(3).exec((err, orderList) => {
+        if (err) throw err;
+        next(orderList);
+    }) 
+}
+
+exports.getAll = function(next){
+    Orders.find({}, (err, orderList) => {
+        if (err) throw err;
+        next(orderList);
+    });
+}
+
+exports.getById = function(id, next){
+    Orders.findOne({"_id":id}, (err, results) => {
+        if (err)  throw err;
+        next(results)
+    })
+}
