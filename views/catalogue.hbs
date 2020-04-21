@@ -255,7 +255,7 @@
         $(".quantity-field").change(function ()
         {
             var val = parseInt($(this).val());
-            if(val > 0)
+            if(val >= 0)
             {
                 var productno = $(this).parents().filter(".item").data('value');
                 var name = $(this).parents().filter(".addToCart").siblings(".itemDescription").children(".itemName").html();
