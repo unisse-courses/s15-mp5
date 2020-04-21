@@ -101,6 +101,7 @@ app.use('/', require('./routes/myorders'));
 app.use('/admin', require('./routes/manageOrder'));
 app.use('/admin', require('./routes/catalogue'));
 app.use('/admin', require('./routes/manageCatalogue'));
+app.use('/admin', require('./routes/profile'));
 
 // Port
 const port = 3000;

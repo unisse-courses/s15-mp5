@@ -1,4 +1,4 @@
-<div class='mx-auto container'>
+<div class='mx-auto container mt-5 mt-md-0'>
     <div class="container"><h3>My Orders</h3></div>
     {{#each activeorders}}
     <div class='row my-3'>
@@ -7,7 +7,7 @@
                 &nbsp;
             </div>
             <div class="row p-4 bg-light">
-                <div class="col-5">
+                <div class="col-md-5 col-12">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
                     <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
                     <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
@@ -17,7 +17,7 @@
                     <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
                 </div>
 
-                <div class='col-7'>
+                <div class='col-md-7 col-12 mt-3 mt-md-5'>
                     <table class="table">
                         <col width="180">
                         <col width="30">
@@ -54,7 +54,7 @@
                 &nbsp;
             </div>
             <div class="row p-4 bg-light">
-                <div class="col-5">
+                <div class="col-md-5 col-12">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
                     <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
                     <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
@@ -64,7 +64,7 @@
                     <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
                 </div>
 
-                <div class='col-7'>
+                <div class='col-md-7 col-12 mt-3 mt-md-5'>
                     <table class="table">
                         <col width="180">
                         <col width="30">
