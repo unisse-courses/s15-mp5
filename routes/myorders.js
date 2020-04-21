@@ -36,7 +36,7 @@ router.get('/myorders', ensureAuthenticated, (req,res) => {
             return obj.status === "Delivered";
           })
   
-          res.render('manageOrder', {title: 'Admin - Orders',
+          res.render('myorders', {title: 'Admin - Orders',
             fname: results.fname,
             profilepic: results.profilepic,
             activeorders: active,

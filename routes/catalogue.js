@@ -20,7 +20,8 @@ router.get('/catalogue', ensureAuthenticated, (req,res) => {
         }
         else{
             
-            Orders.getByBuyer(results.email, function(orderList){
+            Orders.getByBuyer(_id, function(orderList){
+                console.log(orderList[0].order_items)
 
                 Prod.getAll(function(products){
                     res.render('catalogue', 

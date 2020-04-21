@@ -9,9 +9,9 @@
             <div class="row p-4 bg-light">
                 <div class="col-5">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
-                    <span class='font-weight-bold'>{{this.buyername}}</span> - <span>{{this.status}}</span> <br>
-                    <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
-                    <span>123 Main St., Manila City, Metro Manila</span>
+                    <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
+                    <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
+                    <span>{{this.buyer.add1}}, {{this.buyer.add2}}, {{this.buyer.city}}</span>
                     <br><br>
                     <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
                     <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
@@ -38,7 +38,7 @@
                         <tbody>
                             {{#each this.order_items}}
                             <tr>
-                                <td>{{name}} (PHP <span class="price decimal">{{price}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
+                                <td>{{productno.name}} (PHP <span class="price decimal">{{unitprice}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
                                 <td class='text-right'><span class="total decimal"></span></td>
                             </tr>
                             {{/each}}
@@ -54,21 +54,28 @@
     </div>
     {{/each}}
 
-    <br><br><br>
-    <div class="container"><h3>Delivered Orders</h3></div>
+    <br>
 
-    {{#each pastorders}}
-    <div class='row my-3'>
-        <div class='container-fluid border border-0 rounded'>
+    <a class="btn btn-primary" data-toggle="collapse" href="#pastOrders" aria-expanded="false" aria-controls="pastOrderButton">
+        Toggle Delivered Orders
+    </a>
+
+    <br><br>
+
+    <div class="collapse" id="pastOrders">
+        <div class="container"><h3>Delivered Orders</h3></div>
+        {{#each pastorders}}
+        <div class='row my-3'>
+            <div class='container-fluid border border-0 rounded'>
             <div class='row bg-{{this.status}}'>
                 &nbsp;
             </div>
             <div class="row p-4 bg-light">
                 <div class="col-5">
                     <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
-                    <span class='font-weight-bold'>{{this.buyername}}</span> - <span>{{this.status}}</span> <br>
-                    <span>+63 917 123 4567 - {{this.buyer}}</span> <br>
-                    <span>123 Main St., Manila City, Metro Manila</span>
+                    <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
+                    <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
+                    <span>{{this.buyer.add1}}, {{this.buyer.add2}}, {{this.buyer.city}}</span>
                     <br><br>
                     <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
                     <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
@@ -95,7 +102,7 @@
                         <tbody>
                             {{#each this.order_items}}
                             <tr>
-                                <td>{{name}} (PHP <span class="price decimal">{{price}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
+                                <td>{{productno.name}} (PHP <span class="price decimal">{{unitprice}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
                                 <td class='text-right'><span class="total decimal"></span></td>
                             </tr>
                             {{/each}}
@@ -108,8 +115,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
 
 </div>
 

@@ -10,13 +10,11 @@ const Orders = require('../models/orders');
 var shoppingCartItems = null;
 
 class orderItem {
-    constructor(productno, name, price, quantity, computedPrice, itemImg) {
+    constructor(productno, price, quantity, itemPrice) {
         this.productno = productno;
-        this.name = name;
-        this.price = price;
+        this.unitprice = price;
         this.quantity = quantity;
-        this.computedPrice = computedPrice;
-        this.itemImg = itemImg;
+        this.itemPrice = itemPrice;
     }
 }
 
@@ -60,13 +58,13 @@ router.post('/checkout', async (req, res) => {
         
         let total_price = 50;
         let order_items = [];
-        let buyer = results.email;
+        let buyer = _id;
         let status = "Active";
         let buyername = results.fname + " " + results.lname;
 
         for (item of shoppingCartItems) {
             total_price += item.itemPrice;
-            let orderitem = new orderItem(item.productno, item.name, item.price, item.quantity, item.itemPrice, item.itemImg);
+            let orderitem = new orderItem(item.productno, item.price, item.quantity, item.itemPrice);
             order_items.push(orderitem);
         }
 
@@ -82,8 +80,8 @@ router.post('/checkout', async (req, res) => {
         // if(order) console.log('order items successfully added to order');
         // else console.log('error in adding order items to order');
 
-        // console.log(order)
-        Orders.create(status, buyer, buyername, total_price, order_items)
+        //console.log(order_items)
+        Orders.create(status, buyer, total_price, order_items)
 
         res.send(status);
         
