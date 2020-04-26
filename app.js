@@ -9,7 +9,8 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const moment = require('moment');
-
+const { envPort, dbURL, sessionKey } = require('./config/config');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 require('./config/passport')(passport);
@@ -24,11 +25,20 @@ app.use('/admin/',express.static('assets'));
 
 
 // MongoDB
-const URL = "mongodb+srv://LouisD69:baloney1@pharmago-5nuy4.gcp.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
+// const URL = "mongodb+srv://LouisD69:baloney1@pharmago-5nuy4.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
+
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
 
+app.use(session({
+    secret: sessionKey,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 1000 *60 * 60 * 24 * 7 }
+}));
 
 // Handlebars
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
@@ -104,7 +114,7 @@ app.use('/admin', require('./routes/manageCatalogue'));
 app.use('/admin', require('./routes/profile'));
 
 // Port
-const port = 3000;
+const port = envPort || 3000;
 
 app.listen(port, () => {
     console.log(`Server listening at ${port}`);
