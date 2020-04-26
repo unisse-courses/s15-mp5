@@ -69,7 +69,17 @@ exports.getAll = function(next){
 }
 
 exports.getById = function(id, next){
-    Orders.findOne({"_id":id}, (err, results) => {
+    Orders.find({buyer: id})
+        .populate('order_items.productno')
+        .populate('buyer')
+        .exec ((err, results) => {
+        if (err)  throw err;
+        next(results)
+    })
+}
+
+exports.getItemById = function(_id, next){
+    Orders.findOne({_id}, (err, results) => {
         if (err)  throw err;
         next(results)
     })

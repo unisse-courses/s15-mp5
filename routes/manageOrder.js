@@ -37,9 +37,11 @@ router.get('/orders', ensureAuthenticated, (req, res, next) => {
 router.post('/changeStatus', (req, res) =>
 {
   let id = ObjectId(req.body.orderNo);
+  console.log("ID ", id)
   let stat = req.body.newStatus;
 
-  Orders.getById(id, function(results){
+  Orders.getItemById(id, function(results){
+    console.log(results)
     results.status = stat;
     if(stat === "Delivered") 
     {

@@ -26,8 +26,8 @@ router.get('/myorders', ensureAuthenticated, (req,res) => {
 
     Acct.getById(_id, function(results){
       
-        Orders.getAll(function(orderList){
-  
+        Orders.getById(_id, function(orderList){
+          console.log(orderList)
           var active = orderList.filter(obj => {
             return obj.status !== "Delivered";
           })
