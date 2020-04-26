@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const moment = require('moment');
 const { envPort, dbURL, sessionKey } = require('./config/config');
-const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 require('./config/passport')(passport);
@@ -25,9 +24,6 @@ app.use('/admin/',express.static('assets'));
 
 
 // MongoDB
-
-
-
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
@@ -70,15 +66,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Session
-app.use(session({
-    secret: sessionKey,
-    store: new MongoStore({
-        url: dbURL,
-    }),
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000 *60 * 60 * 24 * 7 }
-}));
+app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
