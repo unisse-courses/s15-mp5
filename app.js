@@ -25,7 +25,7 @@ app.use('/admin/',express.static('assets'));
 
 
 // MongoDB
-// const URL = "mongodb+srv://LouisD69:baloney1@pharmago-5nuy4.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
 
 
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -34,7 +34,9 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(session({
     secret: sessionKey,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({
+        url: dbURL,
+    }),
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, maxAge: 1000 *60 * 60 * 24 * 7 }
