@@ -30,13 +30,7 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
 
-app.use(session({
-    secret: sessionKey,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000 *60 * 60 * 24 * 7 }
-}));
+
 
 // Handlebars
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
