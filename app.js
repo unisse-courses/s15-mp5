@@ -26,8 +26,6 @@ app.use('/admin/',express.static('assets'));
 
 // MongoDB
 // const URL = "mongodb+srv://LouisD69:baloney1@pharmago-5nuy4.gcp.mongodb.net/test?retryWrites=true&w=majority";
-
-
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("DB Connected"))
 .catch(err => console.log(err));
