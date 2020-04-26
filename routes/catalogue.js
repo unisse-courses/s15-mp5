@@ -21,7 +21,7 @@ router.get('/catalogue', ensureAuthenticated, (req,res) => {
         else{
             
             Orders.getByBuyer(_id, function(orderList){
-                // console.log(orderList[0].order_items)
+                // console.log(orderList)
 
                 Prod.getAll(function(products){
                     res.render('catalogue', 
