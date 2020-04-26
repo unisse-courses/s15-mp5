@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const moment = require('moment');
 const { envPort, dbURL, sessionKey } = require('./config/config');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 require('./config/passport')(passport);
