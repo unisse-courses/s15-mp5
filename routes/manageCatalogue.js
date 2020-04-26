@@ -29,7 +29,7 @@ const itemupload = multer({storage: itemstrategy, fileFilter: imgfilter}).single
 router.get('/products', ensureAuthenticated, (req, res, next) => {
 
     Prod.getAll(function(results){
-        res.render('manageCatalogue', {title: 'Admin - Catalogue',
+        res.render('managecatalogue', {title: 'Admin - Catalogue',
         fname: req.user.fname,
         profilepic: req.user.profilepic,
         products: results
