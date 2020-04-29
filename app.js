@@ -103,7 +103,7 @@ app.use('/', require('./routes/myorders'));
 app.use('/admin', require('./routes/manageOrder'));
 app.use('/admin', require('./routes/catalogue'));
 app.use('/admin', require('./routes/manageCatalogue'));
-app.use('/admin', require('./routes/profile'));
+app.use('/admin', require('./routes/adminProf'));
 
 // Port
 const port = envPort || 3000;

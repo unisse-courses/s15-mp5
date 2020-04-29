@@ -5,10 +5,15 @@
     {{>head}}
 </head>
 <body>
-    {{>admin_nav}}
+    <div id="page-container">
+        <div id="content-wrap">
+            {{>admin_nav}}
 
-    {{{body}}}
-
-    {{>footer}}
+            {{{body}}}
+        </div>
+        <div id="footer">
+            {{>footer}}
+        </div>
+    </div>
 </body>
 </html>

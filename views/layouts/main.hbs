@@ -5,10 +5,15 @@
     {{>head}}
 </head>
 <body>
-    {{>navbar}}
-    
-    {{{body}}}
+    <div id="page-container">
+        <div id="content-wrap">
+            {{>navbar}}
 
-    {{>footer}}
+            {{{body}}}
+        </div>
+        <div id="footer">
+            {{>footer}}
+        </div>
+    </div>
 </body>
 </html>

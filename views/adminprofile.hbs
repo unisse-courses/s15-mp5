@@ -1,0 +1,36 @@
+<div class="container mt-5 mt-md-0">
+        <div class="row mt-4">
+            <div class="col-sm-12 col-md-12 col-lg-6 px-0">
+                <div class="container-fluid">
+                    <h2>Profile Picture</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <img src='profilepictures/{{profilepic}}' width='200px'>
+                        <form action="/admin/profilepicture" method="POST" enctype="multipart/form-data">
+                            <input type="file" name='profilePic' accept='image/png,image/jpg,.jpg,.jpeg,.png' class='mt-5 file-width'>
+                            <button class='btn btn-success border mt-3'>Change Picture</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h2>Password</h2>
+                    <div class="jumbotron bg-grey" id="accountbox">
+                        <form action="/admin/changepassword" method="POST">
+                            <div class="form-group">
+                                <label for="ps1">New Password</label>
+                                <input name="ps1" class="form-control" type="text" class="ps1">
+                            </div>
+                            <div class="form-group">
+                                <label for="ps2">New Password Confirm</label>
+                                <input name="ps2"class="form-control" type="text" class="ps2">
+                            </div>
+                            <button class='btn btn-success border mt-3'>Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+

@@ -18,17 +18,25 @@
 </nav>
 <div class="mx-auto container">
     <div class='row d-none d-md-flex mb-4'>
-        <div class='col-7 col-md-8 col-lg-9'>
+        <div class='col-md-2 col-lg-2'>
             <img src='pharmago-logo.png' height='30px' onclick="location.href='/catalogue'">
         </div>
-        <div class='col-5 col-md-4 col-lg-3 d-flex align-items-center'>
-                <button onclick="location.href='/logout'" type="button" class='col-4 mr-5 text-center btn btn-outline-dark rounded float-left'>
+        <div class='col-md-3 col-lg-3'>
+
+        </div>
+        <div class='col-md-7 col-lg-7 d-flex justify-content-end'>
+            <div class='pt-2 d-flex flex-row justify-content-end'>
+                <ul class="pagination">
+                <a href='/logout' class='page-item pr-4'>
                     Logout
-                </button>
-                <button onclick="location.href='/profile'" type="button" class='col-7 btn p-0'>
-                    <span class='float-left'>{{fname}}</span>
-                    <img class='rounded-circle float-right' src='profilepictures/{{profilepic}}' height='30px'>
-                </button>
+                </a>
             </div>
+            <div class='d-flex'>
+                <button onclick="location.href='/admin/profile'" type="button" class='btn'>
+                    <span class='float-left pr-3'>{{fname}}</span>
+                    <img class='rounded-circle float-right' src='profilepictures/{{profilepic}}' height='30px' width='30px'>
+                </button>
+            </div> 
+    </div>
     </div>
 </div>
