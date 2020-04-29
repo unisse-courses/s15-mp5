@@ -17,7 +17,7 @@ npm start
 
 >Ignore vulnerabilities. This is caused by an older version of Handlebars due to a problem that occurs in newer versions
 
-3. Open at ```localhost:3000``` using browser
+3. Open at ```localhost:3000``` using browser or https://pharmago-app.herokuapp.com/
 
 4. You can use these accounts to login and test:
     <br />
