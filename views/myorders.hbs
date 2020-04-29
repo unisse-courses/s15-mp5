@@ -1,5 +1,6 @@
 <div class='mx-auto container mt-5 mt-md-0'>
-    <div class="container"><h3>My Orders</h3></div>
+    
+    <div class="container"><h3>My Orders{{#if activeorders}}{{else}} - You have no active orders{{/if}}</h3></div>
     {{#each activeorders}}
     <div class='row my-3'>
         <div class='container-fluid border border-0 rounded'>
@@ -45,53 +46,54 @@
         </div>
     </div>
     {{/each}}
-    <br><br><br>
-    <div class="container"><h3>Past Orders</h3></div>
-    {{#each pastorders}}
-    <div class='row my-3'>
-        <div class='container-fluid border border-0 rounded'>
-            <div class='row bg-{{this.status}}'>
-                &nbsp;
-            </div>
-            <div class="row p-4 bg-light">
-                <div class="col-md-5 col-12">
-                    <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
-                    <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
-                    <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
-                    <span>{{this.buyer.add1}}, {{this.buyer.add2}}, {{this.buyer.city}}</span>
-                    <br><br>
-                    <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
-                    <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
+    {{#if pastorders}}
+        <div class="container mt-5"><h3>Past Orders</h3></div>
+        {{#each pastorders}}
+        <div class='row my-3'>
+            <div class='container-fluid border border-0 rounded'>
+                <div class='row bg-{{this.status}}'>
+                    &nbsp;
                 </div>
+                <div class="row p-4 bg-light">
+                    <div class="col-md-5 col-12">
+                        <span class='orderno' data-value='{{this._id}}'>ORDER NUMBER <h5>{{this._id}}</h5></span>
+                        <span class='font-weight-bold'>{{this.buyer.fname}} {{this.buyer.lname}}</span> - <span>{{this.status}}</span> <br>
+                        <span>{{this.buyer.number}} - {{this.buyer.email}}</span> <br>
+                        <span>{{this.buyer.add1}}, {{this.buyer.add2}}, {{this.buyer.city}}</span>
+                        <br><br>
+                        <span class='font-weight-bold'>DATE ORDERED:</span> {{formatDate this.date_of_order}} <br>
+                        <span class='font-weight-bold'>DATE DELIVERED:</span> {{formatDate this.date_of_deliver}}
+                    </div>
 
-                <div class='col-md-7 col-12 mt-3 mt-md-5'>
-                    <table class="table">
-                        <col width="180">
-                        <col width="30">
-                        <thead>
-                            <tr>
-                                <th>TOTAL</th>
-                                <th class='text-right'>PHP <span class='decimal'>{{this.total_price}}</span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each this.order_items}}
-                            <tr>
-                                <td>{{productno.name}} (PHP <span class="price decimal">{{unitprice}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
-                                <td class='text-right'><span class="total decimal"></span></td>
-                            </tr>
-                            {{/each}}
-                            <tr>
-                                <td>Delivery</td>
-                                <td class='text-right'>50.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class='col-md-7 col-12 mt-3 mt-md-5'>
+                        <table class="table">
+                            <col width="180">
+                            <col width="30">
+                            <thead>
+                                <tr>
+                                    <th>TOTAL</th>
+                                    <th class='text-right'>PHP <span class='decimal'>{{this.total_price}}</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each this.order_items}}
+                                <tr>
+                                    <td>{{productno.name}} (PHP <span class="price decimal">{{unitprice}}</span> X <span class="quantity decimal">{{quantity}}</span>)</td>
+                                    <td class='text-right'><span class="total decimal"></span></td>
+                                </tr>
+                                {{/each}}
+                                <tr>
+                                    <td>Delivery</td>
+                                    <td class='text-right'>50.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {{/each}}
+        {{/each}}
+    {{/if}}
 </div>
 
 <script>
