@@ -22,26 +22,22 @@ npm start
 4. You can use these accounts to login and test:
     <br />
     ##### Normal Users: 
-    - Email: alexis_louis_delacruz@dlsu.edu.ph 
-    - Password: abc
     
-    - Email: sample@user.com 
-    - Password: password
+    | Email  | Password |
+    | ------------- | ------------- |
+    | alexis_louis_delacruz@dlsu.edu.ph | abc  |
+    | sample@user.com   | password  |
+    | jolo@cansana.net   | qwe123  |
+    | another@user.com   | password  |
     
-    - Email: jolo@cansana.net 
-    - Password: qwe123
-    
-    - Email: another@user.com
-    - Password: password
     
     ##### Admin Users: 
-    - Email: admin@lou 
-    - Password: admin
     
-    - Email: admin@rasheed 
-    - Password: password
+    | Email  | Password |
+    | ------------- | ------------- |
+    | admin@lou | admin  |
+    | admin@rasheed | password  |
+    | admin@jolo | password  |
     
-    - Email: admin@jolo 
-    - Password: password
                 
 5. Or Try to **Register** a normal account.
